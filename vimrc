@@ -45,6 +45,11 @@ set clipboard=unnamed
 " To solve issues with colors in tmux session
 set term=screen-256color
 
+" Load ned.vim syntax file when opening omnet .ned files or .msg
+au BufRead,BufNewFile *.ned set filetype=ned
+au BufRead,BufNewFile *.msg set filetype=ned
+
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
