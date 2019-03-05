@@ -49,7 +49,6 @@ set term=screen-256color
 au BufRead,BufNewFile *.ned set filetype=ned
 au BufRead,BufNewFile *.msg set filetype=ned
 
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -161,11 +160,16 @@ if $COLORTERM == 'gnome-terminal'
     set t_Co=256
 endif
 
+" different colorscheme for python
+autocmd FileType python colorscheme molokai
+
 try
-    colorscheme desert
+    "Default colorscheme
+     colorscheme desert 
 catch
 endtry
 
+" background
 set background=dark
 
 " Set extra options when running in GUI mode
