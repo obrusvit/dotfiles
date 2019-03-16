@@ -12,6 +12,8 @@
 "
 " Sections:
 "    -> obrusvit's additions
+"       -> Vundle setting
+"       -> Other stuff
 "    -> General
 "    -> VIM user interface
 "    -> Colors and Fonts
@@ -27,14 +29,65 @@
 "    -> Helper functions
 "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => obrusvit's additions
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" get rid of Vi compatibility mode. SET FIRST!
-set nocompatible          
+" Vundle setting
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set nocompatible              " be iMproved, required
+filetype off                  " required
 
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
+
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+
+" The following are examples of different formats supported.
+" Keep Plugin commands between vundle#begin/end.
+" plugin on GitHub repo
+Plugin 'tpope/vim-fugitive'
+
+" plugin from http://vim-scripts.org/vim/scripts.html
+" Plugin 'L9'
+" Git plugin not hosted on GitHub
+Plugin 'git://git.wincent.com/command-t.git'
+
+" git repos on your local machine (i.e. when working on your own plugin)
+" Plugin 'file:///home/gmarik/path/to/plugin'
+
+" The sparkup vim script is in a subdirectory of this repo called vim.
+" Pass the path to set the runtimepath properly.
+Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
+
+" Install L9 and avoid a Naming conflict if you've already installed a
+" different version somewhere else.
+" Plugin 'ascenator/L9', {'name': 'newL9'}
+
+
+Plugin 'Valloric/YouCompleteMe'
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+" To ignore plugin indent changes, instead use:
+"filetype plugin on
+"
+" Brief help
+" :PluginList       - lists configured plugins
+" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
+" :PluginSearch foo - searches for foo; append `!` to refresh local cache
+" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+"
+" see :h vundle for more details or wiki for FAQ
+" Put your non-Plugin stuff after this line
+"
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Other stuff
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Show line numbers
 set nu 
 
@@ -48,42 +101,12 @@ set term=screen-256color
 " Load ned.vim syntax file when opening omnet .ned files or .msg
 au BufRead,BufNewFile *.ned set filetype=ned
 au BufRead,BufNewFile *.msg set filetype=ned
-" :LargeFont and :SmallFont commands
-let s:pattern = '^\(.* \)\([1-9][0-9]*\)$'
-let s:minfontsize = 6
-let s:maxfontsize = 16
-function! AdjustFontSize(amount)
-  if has("gui_gtk2") && has("gui_running")
-    let fontname = substitute(&guifont, s:pattern, '\1', '')
-    let cursize = substitute(&guifont, s:pattern, '\2', '')
-    let newsize = cursize + a:amount
-    if (newsize >= s:minfontsize) && (newsize <= s:maxfontsize)
-      let newfont = fontname . newsize
-      let &guifont = newfont
-    endif
-  else
-    echoerr "You need to run the GTK2 version of Vim to use this function."
-  endif
-endfunction
 
-function! LargerFont()
-  call AdjustFontSize(1)
-endfunction
-command! LargerFont call LargerFont()
-
-function! SmallerFont()
-  call AdjustFontSize(-1)
-endfunction
-command! SmallerFont call SmallerFont()
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Sets how many lines of history VIM has to remember
 set history=500
-
-" Enable filetype plugins
-filetype plugin on
-filetype indent on
 
 " Set to auto read when a file is changed from the outside
 set autoread
@@ -187,7 +210,7 @@ if $COLORTERM == 'gnome-terminal'
 endif
 
 " different colorscheme for python
-autocmd FileType python colorscheme molokai
+" autocmd FileType python colorscheme molokai
 
 try
     "Default colorscheme
