@@ -69,6 +69,7 @@ Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 
 
 Plugin 'Valloric/YouCompleteMe'
+Plugin 'JuliaEditorSupport/julia-vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -102,6 +103,7 @@ set term=screen-256color
 au BufRead,BufNewFile *.ned set filetype=ned
 au BufRead,BufNewFile *.msg set filetype=ned
 
+runtime macros/matchit.vim
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
