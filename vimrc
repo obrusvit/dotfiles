@@ -51,26 +51,12 @@ Plugin 'VundleVim/Vundle.vim'
 " plugin on GitHub repo
 Plugin 'tpope/vim-fugitive'
 
-" plugin from http://vim-scripts.org/vim/scripts.html
-" Plugin 'L9'
-" Git plugin not hosted on GitHub
-Plugin 'git://git.wincent.com/command-t.git'
-
-" git repos on your local machine (i.e. when working on your own plugin)
-" Plugin 'file:///home/gmarik/path/to/plugin'
-
-" The sparkup vim script is in a subdirectory of this repo called vim.
-" Pass the path to set the runtimepath properly.
-Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
-
-" Install L9 and avoid a Naming conflict if you've already installed a
-" different version somewhere else.
-" Plugin 'ascenator/L9', {'name': 'newL9'}
-
+" Mine plugins
 
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'JuliaEditorSupport/julia-vim'
-
+Plugin 'tmhedberg/SimpylFold'
+Plugin 'vim-scripts/indentpython.vim'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -99,6 +85,15 @@ set clipboard=unnamed
 " To solve issues with colors in tmux session
 set term=screen-256color
 
+" prooper PEP 8 indentation for python
+au BufNewFile,BufRead *.py
+    \ set tabstop=4
+    \ set softtabstop=4
+    \ set shiftwidth=4
+    \ set textwidth=79
+    \ set expandtab
+    \ set autoindent
+    \ set fileformat=unix
 " Load ned.vim syntax file when opening omnet .ned files or .msg
 au BufRead,BufNewFile *.ned set filetype=ned
 au BufRead,BufNewFile *.msg set filetype=ned
@@ -115,6 +110,8 @@ nmap <leader>w :w!<cr>
 " python syntax
 let python_highlight_all=1
 syntax on
+
+" shortcut for YcmCompleter
 map <leader>g :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -215,9 +212,6 @@ syntax enable
 if $COLORTERM == 'gnome-terminal'
     set t_Co=256
 endif
-
-" different colorscheme for python
-" autocmd FileType python colorscheme molokai
 
 try
     "Default colorscheme
