@@ -86,8 +86,8 @@ set clipboard=unnamed
 set term=screen-256color
 
 " prooper PEP 8 indentation for python
-au BufNewFile,BufRead *.py
-    \ set tabstop=4
+au BufNewFile,BufRead *.py;
+    \ set tabstop=4 
     \ set softtabstop=4
     \ set shiftwidth=4
     \ set textwidth=79
