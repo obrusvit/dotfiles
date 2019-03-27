@@ -123,6 +123,9 @@ alias sumo1-gui='~/./Tools/sumo-1.0.1/bin/sumo-gui'
 alias netedit1='~/./Tools/sumo-1.0.1/bin/netedit'
 
 # [MINE ADDITION]
+VISUAL=vim; export VISUAL EDITOR=vim; export EDITOR
+
+# [MINE ADDITION]
 # Interesting functions from Quora https://www.quora.com/What-is-the-most-useful-bash-script-that-you-have-ever-written/answer/Danish-Pruthi?share=be33bcbf&srid=Wrzd
     function up() {
       times=$1
