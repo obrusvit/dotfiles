@@ -56,9 +56,22 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'JuliaEditorSupport/julia-vim'
 Plugin 'tmhedberg/SimpylFold'
-Plugin 'vim-scripts/indentpython.vim'
+" Plugin 'vim-scripts/indentpython.vim'
+
+" Add maktaba and codefmt to the runtimepath.
+" (The latter must be installed before it can be used.)
+Plugin 'google/vim-maktaba'
+Plugin 'google/vim-codefmt'
+" Also add Glaive, which is used to configure codefmt's maktaba flags. See
+" `:help :Glaive` for usage.
+Plugin 'google/vim-glaive'
+
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
+" the glaive#Install() should go after the call vundle#end()
+call glaive#Install()
+
 filetype plugin indent on    " required
 " To ignore plugin indent changes, instead use:
 "filetype plugin on
@@ -94,6 +107,7 @@ au BufNewFile,BufRead *.py;
     \ set expandtab
     \ set autoindent
     \ set fileformat=unix
+
 " Load ned.vim syntax file when opening omnet .ned files or .msg
 au BufRead,BufNewFile *.ned set filetype=ned
 au BufRead,BufNewFile *.msg set filetype=ned
@@ -111,7 +125,13 @@ nmap <leader>w :w!<cr>
 let python_highlight_all=1
 syntax on
 
-" shortcut for YcmCompleter
+" SimplyFold Plugin setting
+let g:SimpylFold_docstring_preview = 1
+
+" always start editing file with no folds
+set foldlevelstart=99
+
+" shortcut for YcmCompleter"
 map <leader>g :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
