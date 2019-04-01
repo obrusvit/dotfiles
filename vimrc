@@ -57,7 +57,9 @@ Plugin 'Valloric/YouCompleteMe'
 Plugin 'JuliaEditorSupport/julia-vim'
 Plugin 'tmhedberg/SimpylFold'
 " Plugin 'vim-scripts/indentpython.vim'
+Plugin 'octol/vim-cpp-enhanced-highlight'
 
+" THE FOLLOWING LINES are to add google code formatter, see github
 " Add maktaba and codefmt to the runtimepath.
 " (The latter must be installed before it can be used.)
 Plugin 'google/vim-maktaba'
@@ -133,7 +135,9 @@ set foldlevelstart=99
 
 " shortcut for YcmCompleter"
 map <leader>g :YcmCompleter GoToDefinitionElseDeclaration<CR>
-
+" default fallback for YcmCompleter extra conf file
+" necessary for C languages semantic completition
+let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
