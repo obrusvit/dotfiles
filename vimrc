@@ -133,11 +133,26 @@ let g:SimpylFold_docstring_preview = 1
 " always start editing file with no folds
 set foldlevelstart=99
 
+" YouCompleteMe (YCM) related stuff
 " shortcut for YcmCompleter"
 map <leader>g :YcmCompleter GoToDefinitionElseDeclaration<CR>
 " default fallback for YcmCompleter extra conf file
 " necessary for C languages semantic completition
 let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
+"
+" turn off the diagnostics whatsoever
+"let g:ycm_show_diagnostics_ui = 0
+"
+" turn off the signs (arrows) on the left side of the screen
+" it moves code :(
+let g:ycm_enable_diagnostic_signs = 0
+
+" turn off highlighting in red
+"let g:ycm_enable_diagnostic_highlighting = 0
+
+" XML comment
+" usage: choose XML tag with 'vat' and then use this command
+map <leader>cx :s/^\(.*\)$/<!--\1-->/<CR><leader><CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
