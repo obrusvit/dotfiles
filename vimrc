@@ -153,6 +153,9 @@ let g:ycm_enable_diagnostic_signs = 0
 " XML comment
 " usage: choose XML tag with 'vat' and then use this command
 map <leader>cx :s/^\(.*\)$/<!--\1-->/<CR><leader><CR>
+
+" C/C++/Java/Kotlin - write long part - delimmiting line comment
+map <leader>/ O<ESC>o//------------------------------------------------------------------------------<ESC>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -261,6 +264,14 @@ endtry
 
 " background
 set background=dark
+
+" YCM colors of errors and warnings
+" TODO not working now
+"highlight YcmErroLine guibg=#1f0000
+"highlight YcmErroSign guibg=#1f0000
+"highlight YcmWarningLine guibg=#ffffcc
+"highlight YcmWarningSign guibg=#ffffcc
+"highlight YcmWarningSection guibg=#ffffcc
 
 " Set extra options when running in GUI mode
 if has("gui_running")
