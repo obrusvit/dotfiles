@@ -143,7 +143,7 @@ let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
 
 " automatically load .ycm_extra_conf
 " WARNING car run malicious code, switch to 1 if not needed
-let g:ycm_confirm_extra_conf = 0
+" let g:ycm_confirm_extra_conf = 0
 
 " turn off the diagnostics whatsoever
 "let g:ycm_show_diagnostics_ui = 0
