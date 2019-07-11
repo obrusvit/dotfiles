@@ -136,13 +136,18 @@ set foldlevelstart=99
 " YouCompleteMe (YCM) related stuff
 " shortcut for YcmCompleter"
 map <leader>g :YcmCompleter GoToDefinitionElseDeclaration<CR>
+
 " default fallback for YcmCompleter extra conf file
 " necessary for C languages semantic completition
 let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
-"
+
+" automatically load .ycm_extra_conf
+" WARNING car run malicious code, switch to 1 if not needed
+let g:ycm_confirm_extra_conf = 0
+
 " turn off the diagnostics whatsoever
 "let g:ycm_show_diagnostics_ui = 0
-"
+
 " turn off the signs (arrows) on the left side of the screen
 " it moves code :(
 let g:ycm_enable_diagnostic_signs = 0
