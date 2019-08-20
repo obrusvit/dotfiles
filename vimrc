@@ -1,20 +1,17 @@
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Maintainer: 
+" Used_by:
+"       obrusvit - @trashcleaner
+"
+" Based_on:
 "       Amir Salihefendic — @amix3k
-"
-" Awesome_version:
-"       Get this config, nice color schemes and lots of plugins!
-"
-"       Install the awesome version from:
-"
+"       basic version of 
 "           https://github.com/amix/vimrc
 "
 " Sections:
-"    -> obrusvit's additions
-"       -> Vundle setting
-"       -> Other stuff
+"    -> Vundle setting
 "    -> General
+"    -> Programming languages
 "    -> VIM user interface
 "    -> Colors and Fonts
 "    -> Files and backups
@@ -29,8 +26,6 @@
 "    -> Helper functions
 "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => obrusvit's additions
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Vundle setting
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -53,11 +48,16 @@ Plugin 'tpope/vim-fugitive'
 
 " Mine plugins
 
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'JuliaEditorSupport/julia-vim'
-Plugin 'tmhedberg/SimpylFold'
-" Plugin 'vim-scripts/indentpython.vim'
+" languages syntax support
 Plugin 'octol/vim-cpp-enhanced-highlight'
+Plugin 'udalov/kotlin-vim'
+Plugin 'JuliaEditorSupport/julia-vim'
+
+" YCM - see GitHub for correct setup and build
+Plugin 'Valloric/YouCompleteMe'
+
+" better code folding using 'zc' 'zo' commands
+Plugin 'tmhedberg/SimpylFold'
 
 " THE FOLLOWING LINES are to add google code formatter, see github
 " Add maktaba and codefmt to the runtimepath.
@@ -87,18 +87,31 @@ filetype plugin indent on    " required
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
 "
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Other stuff
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Show line numbers
-set nu 
 
-" Set vim to use system clipboard 
-" source https://vim.fandom.com/wiki/Accessing_the_system_clipboard
-set clipboard=unnamed
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => General
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Sets how many lines of history VIM has to remember
+set history=500
 
-" To solve issues with colors in tmux session
-set term=screen-256color
+" Set to auto read when a file is changed from the outside
+set autoread
+
+" :W sudo saves the file 
+" (useful for handling the permission-denied error)
+command W w !sudo tee % > /dev/null
+
+" With a map leader it's possible to do extra key combinations
+" like <leader>w saves the current file
+let mapleader = ","
+
+" Fast saving
+nmap <leader>w :w!<cr>
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Programming languages
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+syntax on
 
 " prooper PEP 8 indentation for python
 au BufNewFile,BufRead *.py;
@@ -116,16 +129,8 @@ au BufRead,BufNewFile *.msg set filetype=ned
 
 runtime macros/matchit.vim
 
-" With a map leader it's possible to do extra key combinations
-" like <leader>w saves the current file
-let mapleader = ","
-
-" Fast saving
-nmap <leader>w :w!<cr>
-
 " python syntax
 let python_highlight_all=1
-syntax on
 
 " SimplyFold Plugin setting
 let g:SimpylFold_docstring_preview = 1
@@ -161,18 +166,6 @@ map <leader>cx :s/^\(.*\)$/<!--\1-->/<CR><leader><CR>
 
 " C/C++/Java/Kotlin - write long part - delimmiting line comment
 map <leader>/ O<ESC>o//------------------------------------------------------------------------------<ESC>
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => General
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Sets how many lines of history VIM has to remember
-set history=500
-
-" Set to auto read when a file is changed from the outside
-set autoread
-
-" :W sudo saves the file 
-" (useful for handling the permission-denied error)
-command W w !sudo tee % > /dev/null
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => VIM user interface
@@ -244,10 +237,15 @@ if has("gui_macvim")
     autocmd GUIEnter * set vb t_vb=
 endif
 
-
 " Add a bit extra margin to the left
 set foldcolumn=1
 
+" Show line numbers
+set nu 
+
+" Set vim to use system clipboard 
+" source https://vim.fandom.com/wiki/Accessing_the_system_clipboard
+set clipboard=unnamed
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Colors and Fonts
@@ -457,6 +455,8 @@ map <leader>x :e ~/buffer.md<cr>
 " Toggle paste mode on and off
 map <leader>pp :setlocal paste!<cr>
 
+" To solve issues with colors in tmux session
+set term=screen-256color
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Helper functions
