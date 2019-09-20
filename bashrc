@@ -163,3 +163,5 @@ VISUAL=vim; export VISUAL EDITOR=vim; export EDITOR
         echo "'$1' is not a valid file!"
       fi
     }
+
+    export -f extract

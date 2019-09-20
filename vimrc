@@ -41,12 +41,9 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 
-" The following are examples of different formats supported.
 " Keep Plugin commands between vundle#begin/end.
-" plugin on GitHub repo
+" Git wrapper for vim (it's a blast)
 Plugin 'tpope/vim-fugitive'
-
-" Mine plugins
 
 " languages syntax support
 Plugin 'octol/vim-cpp-enhanced-highlight'
@@ -170,6 +167,9 @@ map <leader>/ O<ESC>o//---------------------------------------------------------
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => VIM user interface
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Display line nums not as absolute but relative to the cursor
+set relativenumber
+
 " Set 7 lines to the cursor - when moving vertically using j/k
 set so=7
 
@@ -243,9 +243,11 @@ set foldcolumn=1
 " Show line numbers
 set nu 
 
-" Set vim to use system clipboard 
-" source https://vim.fandom.com/wiki/Accessing_the_system_clipboard
+" Set vim to use system clipboard, copied text from vim can
+" be pasted with CTRL+v elsewhere and copied text with 
+" CTRL+c from elsewhere can be pasted to vim with 'p'
 set clipboard=unnamed
+set clipboard=unnamedplus
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Colors and Fonts
@@ -434,6 +436,10 @@ noremap <Leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
 
 " To solve issues with colors in tmux session
 set term=screen-256color
+
+" Write datetime when <F3> is pressed
+nmap <F3> i<C-R>=strftime("%Y-%m-%d %a %I:%M %p")<C-R><Esc>
+"imap <F3> <C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Helper functions
