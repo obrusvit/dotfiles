@@ -20,7 +20,6 @@
 "    -> Moving around, tabs and buffers
 "    -> Status line
 "    -> Editing mappings
-"    -> vimgrep searching and cope displaying
 "    -> Spell checking
 "    -> Misc
 "    -> Helper functions
@@ -135,7 +134,8 @@ let g:SimpylFold_docstring_preview = 1
 " always start editing file with no folds
 set foldlevelstart=99
 
-" YouCompleteMe (YCM) related stuff
+" ==> YouCompleteMe (YCM) related stuff
+"
 " shortcut for YcmCompleter"
 map <leader>g :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
@@ -145,7 +145,7 @@ let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
 
 " automatically load .ycm_extra_conf
 " WARNING car run malicious code, switch to 1 if not needed
-" let g:ycm_confirm_extra_conf = 0
+let g:ycm_confirm_extra_conf = 1
 
 " turn off the diagnostics whatsoever
 "let g:ycm_show_diagnostics_ui = 0
@@ -163,6 +163,9 @@ map <leader>cx :s/^\(.*\)$/<!--\1-->/<CR><leader><CR>
 
 " C/C++/Java/Kotlin - write long part - delimmiting line comment
 map <leader>/ O<ESC>o//------------------------------------------------------------------------------<ESC>
+
+" use Glaive to set parameters of codefmt
+Glaive codefmt clang_format_style='{BasedOnStyle: LLVM, IndentWidth: 4}'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => VIM user interface
@@ -232,10 +235,6 @@ set novisualbell
 set t_vb=
 set tm=500
 
-" Properly disable sound on errors on MacVim
-if has("gui_macvim")
-    autocmd GUIEnter * set vb t_vb=
-endif
 
 " Add a bit extra margin to the left
 set foldcolumn=1
