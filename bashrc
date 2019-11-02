@@ -116,8 +116,19 @@ if ! shopt -oq posix; then
   fi
 fi
 
+# [MINE ADDITION] Sumo home
+#export SUMO_HOME="/usr/share/sumo"
+export SUMO_HOME="/usr/local/share/sumo"
+export SUMO_BIN="/usr/local/share/sumo/bin"
+export SUMO_FR="/home/obrusvit/Tools/sumo-1.1.0/tools/detector/flowrouter.py"
+export SUMO_VAL="/home/obrusvit/Tools/sumo-1.1.0/tools/detector/validate.py"
+
+# [MINE ADDITOIN] Own commands
+# Wacom setting "wacom", "wacom_work_display", "fix_inotify.." etc.
+export PATH=$PATH:/home/obrusvit/bin
+
 # [MINE ADDITION]
-VISUAL=vim; export VISUAL EDITOR=vim; export EDITOR
+VISUAL=vim; export VISUAL EDITOR=vim; export EDITOR=vim
 
 # [MINE ADDITION]
 # Interesting functions from Quora https://www.quora.com/What-is-the-most-useful-bash-script-that-you-have-ever-written/answer/Danish-Pruthi?share=be33bcbf&srid=Wrzd
