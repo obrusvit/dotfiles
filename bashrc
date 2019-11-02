@@ -116,12 +116,6 @@ if ! shopt -oq posix; then
   fi
 fi
 
-
-# [MINE ADDITION]
-alias sumo1='~/./Tools/sumo-1.0.1/bin/sumo'
-alias sumo1-gui='~/./Tools/sumo-1.0.1/bin/sumo-gui'
-alias netedit1='~/./Tools/sumo-1.0.1/bin/netedit'
-
 # [MINE ADDITION]
 VISUAL=vim; export VISUAL EDITOR=vim; export EDITOR
 
