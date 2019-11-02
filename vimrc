@@ -165,7 +165,11 @@ map <leader>cx :s/^\(.*\)$/<!--\1-->/<CR><leader><CR>
 map <leader>/ O<ESC>o//------------------------------------------------------------------------------<ESC>
 
 " use Glaive to set parameters of codefmt
-Glaive codefmt clang_format_style='{BasedOnStyle: LLVM, IndentWidth: 4}'
+Glaive codefmt clang_format_style='{
+            \ BasedOnStyle: Google,
+            \ IndentWidth: 4, 
+            \BreakBeforeBraces: Stroustrup
+            \}'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => VIM user interface
