@@ -48,6 +48,7 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'octol/vim-cpp-enhanced-highlight'
 Plugin 'udalov/kotlin-vim'
 Plugin 'JuliaEditorSupport/julia-vim'
+Plugin 'vim-python/python-syntax'
 
 " YCM - see GitHub for correct setup and build
 Plugin 'Valloric/YouCompleteMe'
@@ -126,7 +127,9 @@ au BufRead,BufNewFile *.msg set filetype=ned
 runtime macros/matchit.vim
 
 " python syntax
-let python_highlight_all=1
+" see for more: https://github.com/vim-python/python-syntax 
+let g:python_highlight_all=1
+let g:python_highlight_class_vars=1
 
 " SimplyFold Plugin setting
 let g:SimpylFold_docstring_preview = 1
@@ -266,6 +269,7 @@ endif
 try
     "Default colorscheme
      colorscheme desert 
+     "colorscheme solarized 
      "colorscheme molokai
 catch
 endtry
@@ -303,6 +307,21 @@ set ffs=unix,dos,mac
 set nobackup
 set nowb
 set noswapfile
+
+" Netrw setup
+"let g:netrw_banner = 0 
+let g:netrw_liststyle = 3 "change liststyle with 'i'
+let g:netrw_browse_split = 0 "  1-new horz split
+                             "  2-new vert split
+                             "  3-new tab
+                             "  4-open in prev windows
+let g:netrw_altv = 1 "not sure what is this
+let g:netrw_winsize = 50 "half of a winsize
+let g:netrw_fastbrowse = 0 "fixes some bug
+"augroup ProjectDrawer
+"  autocmd!
+"  autocmd VimEnter * :Vexplore
+"augroup END
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
