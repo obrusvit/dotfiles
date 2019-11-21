@@ -117,11 +117,10 @@ if ! shopt -oq posix; then
 fi
 
 # [MINE ADDITION] Sumo home
-#export SUMO_HOME="/usr/share/sumo"
 export SUMO_HOME="/usr/local/share/sumo"
 export SUMO_BIN="/usr/local/share/sumo/bin"
-export SUMO_FR="/home/obrusvit/Tools/sumo-1.1.0/tools/detector/flowrouter.py"
-export SUMO_VAL="/home/obrusvit/Tools/sumo-1.1.0/tools/detector/validate.py"
+export SUMO_FR="/home/obrusvit/Tools/sumo-1.2.0/tools/detector/flowrouter.py"
+export SUMO_VAL="/home/obrusvit/Tools/sumo-1.2.0/tools/detector/validate.py"
 
 # [MINE ADDITOIN] Own commands
 # Wacom setting "wacom", "wacom_work_display", "fix_inotify.." etc.
