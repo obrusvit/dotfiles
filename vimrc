@@ -49,12 +49,17 @@ Plugin 'octol/vim-cpp-enhanced-highlight'
 Plugin 'udalov/kotlin-vim'
 Plugin 'JuliaEditorSupport/julia-vim'
 Plugin 'vim-python/python-syntax'
+Plugin 'heavenshell/vim-pydocstring'
 
 " YCM - see GitHub for correct setup and build
 Plugin 'Valloric/YouCompleteMe'
 
 " better code folding using 'zc' 'zo' commands
 Plugin 'tmhedberg/SimpylFold'
+
+" fzf (fuzzy finder) & integration
+Plugin 'junegunn/fzf'
+Plugin 'junegunn/fzf.vim'
 
 " THE FOLLOWING LINES are to add google code formatter, see github
 " Add maktaba and codefmt to the runtimepath.
@@ -138,13 +143,17 @@ let g:SimpylFold_docstring_preview = 1
 set foldlevelstart=99
 
 " ==> YouCompleteMe (YCM) related stuff
-"
-" shortcut for YcmCompleter"
+
+" set to 1 if you don't want to use YCM
+"let g:loaded_youcompleteme = 1
+
+" shortcut for YCM"
 map <leader>g :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
 " default fallback for YcmCompleter extra conf file
 " necessary for C languages semantic completition
 let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
+"let g:ycm_global_ycm_extra_conf = "~/.vim/bundle/YouCompleteMe/third_party/ycmd/.ycm_extra_conf.py"
 
 " automatically load .ycm_extra_conf
 " WARNING car run malicious code, switch to 1 if not needed
