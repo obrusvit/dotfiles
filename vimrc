@@ -41,8 +41,11 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
 " Keep Plugin commands between vundle#begin/end.
+
 " Git wrapper for vim (it's a blast)
 Plugin 'tpope/vim-fugitive'
+" Comment out stuff
+Plugin 'tpope/vim-commentary'
 
 " languages syntax support
 Plugin 'octol/vim-cpp-enhanced-highlight'
@@ -50,6 +53,9 @@ Plugin 'udalov/kotlin-vim'
 Plugin 'JuliaEditorSupport/julia-vim'
 Plugin 'vim-python/python-syntax'
 Plugin 'heavenshell/vim-pydocstring'
+
+" Auto Pairs - Insert or delete brackets, parens, quotes in pair.
+Plugin 'jiangmiao/auto-pairs'
 
 " YCM - see GitHub for correct setup and build
 Plugin 'Valloric/YouCompleteMe'
@@ -131,6 +137,9 @@ au BufRead,BufNewFile *.msg set filetype=ned
 
 runtime macros/matchit.vim
 
+" vim-commentary, julia commentstring
+autocmd FileType julia setlocal commentstring=#\ %s
+
 " python syntax
 " see for more: https://github.com/vim-python/python-syntax 
 let g:python_highlight_all=1
@@ -168,10 +177,6 @@ let g:ycm_enable_diagnostic_signs = 0
 
 " turn off highlighting in red
 "let g:ycm_enable_diagnostic_highlighting = 0
-
-" XML comment
-" usage: choose XML tag with 'vat' and then use this command
-map <leader>cx :s/^\(.*\)$/<!--\1-->/<CR><leader><CR>
 
 " C/C++/Java/Kotlin - write long part - delimmiting line comment
 map <leader>/ O<ESC>o//------------------------------------------------------------------------------<ESC>
@@ -424,7 +429,7 @@ au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g
 set laststatus=2
 
 " Format the status line
-set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l\ \ Column:\ %c
+set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ Line:%l\ Col:%c
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
