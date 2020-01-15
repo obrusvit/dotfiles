@@ -129,7 +129,8 @@ export SUMO_VAL="/home/obrusvit/Tools/sumo-1.2.0/tools/detector/validate.py"
 export PATH=$PATH:/home/obrusvit/bin
 
 # [MINE ADDITION]
-VISUAL=vim; export VISUAL EDITOR=vim; export EDITOR=vim
+export EDITOR=vim
+export FILE=ranger
 
 # [MINE ADDITION]
 # Interesting functions from Quora https://www.quora.com/What-is-the-most-useful-bash-script-that-you-have-ever-written/answer/Danish-Pruthi?share=be33bcbf&srid=Wrzd
@@ -173,3 +174,6 @@ VISUAL=vim; export VISUAL EDITOR=vim; export EDITOR=vim
     export -f extract
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+# [MINE ADDITION] Solarized dircolors
+eval `dircolors /home/obrusvit/.solarized/dircolors-solarized/dircolors.256dark`

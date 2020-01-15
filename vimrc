@@ -67,6 +67,9 @@ Plugin 'tmhedberg/SimpylFold'
 Plugin 'junegunn/fzf'
 Plugin 'junegunn/fzf.vim'
 
+" Solarized colorscheme
+Plugin 'altercation/vim-colors-solarized'
+
 " THE FOLLOWING LINES are to add google code formatter, see github
 " Add maktaba and codefmt to the runtimepath.
 " (The latter must be installed before it can be used.)
@@ -280,16 +283,16 @@ if $COLORTERM == 'gnome-terminal'
     set t_Co=256
 endif
 
+" background
+set background=dark
+let g:solarized_termcolors='256'
 try
     "Default colorscheme
-     colorscheme desert 
-     "colorscheme solarized 
-     "colorscheme molokai
+     " colorscheme desert 
+     colorscheme solarized 
 catch
 endtry
 
-" background
-set background=dark
 
 " YCM colors of errors and warnings
 " TODO not working now
@@ -396,7 +399,6 @@ map <leader>tn :tabnew<cr>
 map <leader>to :tabonly<cr>
 map <leader>tc :tabclose<cr>
 map <leader>tm :tabmove 
-map <leader>t<leader> :tabnext 
 
 " Let 'tl' toggle between this and the last accessed tab
 let g:lasttab = 1
@@ -471,7 +473,7 @@ map <leader>s? z=
 noremap <Leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
 
 " To solve issues with colors in tmux session
-set term=screen-256color
+set term=screen-256color-bce
 
 " Write datetime when <F3> is pressed
 nmap <F3> i<C-R>=strftime("%Y-%m-%d %a %I:%M %p")<C-R><Esc>
