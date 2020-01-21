@@ -14,7 +14,7 @@
 "    -> Programming languages
 "    -> VIM user interface
 "    -> Colors and Fonts
-"    -> Files and backups
+"    -> Files, backups, undo and netrw setup
 "    -> Text, tab and indent related
 "    -> Visual mode related
 "    -> Moving around, tabs and buffers
@@ -70,6 +70,10 @@ Plugin 'junegunn/fzf.vim'
 " Solarized colorscheme
 Plugin 'altercation/vim-colors-solarized'
 
+" Status tabline 
+Plugin 'https://github.com/vim-airline/vim-airline'
+Plugin 'https://github.com/vim-airline/vim-airline-themes'
+
 " THE FOLLOWING LINES are to add google code formatter, see github
 " Add maktaba and codefmt to the runtimepath.
 " (The latter must be installed before it can be used.)
@@ -78,7 +82,6 @@ Plugin 'google/vim-codefmt'
 " Also add Glaive, which is used to configure codefmt's maktaba flags. See
 " `:help :Glaive` for usage.
 Plugin 'google/vim-glaive'
-
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -154,13 +157,19 @@ let g:SimpylFold_docstring_preview = 1
 " always start editing file with no folds
 set foldlevelstart=99
 
-" ==> YouCompleteMe (YCM) related stuff
+" AutoPairs shortcuts (the default <M-'some'> doesn't work in gnome-terminal)
+let g:AutoPairsShortcutToggle = '<C-p>' 
+let g:AutoPairsShortcutFastWrap = '<C-e>'
+
+"==> YouCompleteMe (YCM) related stuff
 
 " set to 1 if you don't want to use YCM
 "let g:loaded_youcompleteme = 1
 
-" shortcut for YCM"
-map <leader>g :YcmCompleter GoToDefinitionElseDeclaration<CR>
+" shortcuts for YCM"
+nmap <leader>g :YcmCompleter GoToDefinitionElseDeclaration<CR>
+nmap <leader>f :YcmCompleter FixIt<CR>
+
 
 " default fallback for YcmCompleter extra conf file
 " necessary for C languages semantic completition
@@ -169,7 +178,7 @@ let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
 
 " automatically load .ycm_extra_conf
 " WARNING car run malicious code, switch to 1 if not needed
-let g:ycm_confirm_extra_conf = 1
+let g:ycm_confirm_extra_conf = 0
 
 " turn off the diagnostics whatsoever
 "let g:ycm_show_diagnostics_ui = 0
@@ -181,14 +190,21 @@ let g:ycm_enable_diagnostic_signs = 0
 " turn off highlighting in red
 "let g:ycm_enable_diagnostic_highlighting = 0
 
+" YCM colors of errors and warnings
+" TODO not working now
+"highlight YcmErroLine guibg=#1f0000
+"highlight YcmErroSign guibg=#1f0000
+"highlight YcmWarningLine guibg=#ffffcc
+"highlight YcmWarningSign guibg=#ffffcc
+"highlight YcmWarningSection guibg=#ffffcc
+
 " C/C++/Java/Kotlin - write long part - delimmiting line comment
 map <leader>/ O<ESC>o//------------------------------------------------------------------------------<ESC>
 
 " use Glaive to set parameters of codefmt
 Glaive codefmt clang_format_style='{
-            \ BasedOnStyle: Google,
             \ IndentWidth: 4, 
-            \BreakBeforeBraces: Stroustrup
+            \ BreakBeforeBraces: Stroustrup
             \}'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -211,11 +227,7 @@ set wildmenu
 
 " Ignore compiled files
 set wildignore=*.o,*~,*.pyc
-if has("win16") || has("win32")
-    set wildignore+=.git\*,.hg\*,.svn\*
-else
-    set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/.DS_Store
-endif
+set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/.DS_Store
 
 "Always show current position
 set ruler
@@ -285,22 +297,15 @@ endif
 
 " background
 set background=dark
-let g:solarized_termcolors='256'
-try
-    "Default colorscheme
-     " colorscheme desert 
-     colorscheme solarized 
-catch
-endtry
 
+" 256 = almost black, dark = katapa blue (default)
+" let g:solarized_termcolors='256' 
+let g:solarized_termcolors='dark' 
+"
+" Default colorscheme
+ " colorscheme desert 
+ colorscheme solarized 
 
-" YCM colors of errors and warnings
-" TODO not working now
-"highlight YcmErroLine guibg=#1f0000
-"highlight YcmErroSign guibg=#1f0000
-"highlight YcmWarningLine guibg=#ffffcc
-"highlight YcmWarningSign guibg=#ffffcc
-"highlight YcmWarningSection guibg=#ffffcc
 
 " Set extra options when running in GUI mode
 if has("gui_running")
@@ -318,7 +323,7 @@ set ffs=unix,dos,mac
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Files, backups and undo
+" => Files, backups, undo and netrw setup
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Turn backup off, since most stuff is in SVN, git et.c anyway...
 set nobackup
@@ -327,7 +332,7 @@ set noswapfile
 
 " Netrw setup
 "let g:netrw_banner = 0 
-let g:netrw_liststyle = 3 "change liststyle with 'i'
+" let g:netrw_liststyle = 3 "change liststyle with 'i'
 let g:netrw_browse_split = 0 "  1-new horz split
                              "  2-new vert split
                              "  3-new tab
@@ -335,11 +340,9 @@ let g:netrw_browse_split = 0 "  1-new horz split
 let g:netrw_altv = 1 "not sure what is this
 let g:netrw_winsize = 50 "half of a winsize
 let g:netrw_fastbrowse = 0 "fixes some bug
-"augroup ProjectDrawer
-"  autocmd!
-"  autocmd VimEnter * :Vexplore
-"augroup END
-
+" Per default, netrw leaves unmodified buffers open. This autocommand
+" deletes netrw's buffer once it's hidden (using ':q', for example)
+autocmd FileType netrw setl bufhidden=delete
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Text, tab and indent related
