@@ -117,9 +117,11 @@ if ! shopt -oq posix; then
 fi
 
 # [MINE ADDITION] Sumo home
-export SUMO_HOME="/usr/local/share/sumo"
+# export SUMO_HOME="/usr/local/share/sumo"
 #export SUMO_HOME="/home/obrusvit/Tools/sumo-1.3.1"
-#export SUMO_HOME="/home/obrusvit/Tools/sumo-1.4.0"
+export SUMO_HOME="/home/obrusvit/Tools/sumo-1.4.0"
+# export SUMO_HOME="/home/obrusvit/Tools/sumo"
+
 export SUMO_BIN="/usr/local/share/sumo/bin"
 export SUMO_FR="/home/obrusvit/Tools/sumo-1.2.0/tools/detector/flowrouter.py"
 export SUMO_VAL="/home/obrusvit/Tools/sumo-1.2.0/tools/detector/validate.py"
@@ -180,4 +182,10 @@ eval `dircolors /home/obrusvit/.solarized/dircolors-solarized/dircolors.256dark`
 
 function ff() {
     find ~/* -type f | fzf -m --preview="bat --style=numbers --color=always {} | head -500"
+}
+
+function clra() {
+    # clear all
+    clear
+    tmux clear-history
 }
