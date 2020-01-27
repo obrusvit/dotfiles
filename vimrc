@@ -15,6 +15,7 @@
 "    -> VIM user interface
 "    -> Colors and Fonts
 "    -> Files, backups, undo and netrw setup
+"    -> File (new) templates
 "    -> Text, tab and indent related
 "    -> Visual mode related
 "    -> Moving around, tabs and buffers
@@ -343,6 +344,20 @@ let g:netrw_fastbrowse = 0 "fixes some bug
 " Per default, netrw leaves unmodified buffers open. This autocommand
 " deletes netrw's buffer once it's hidden (using ':q', for example)
 autocmd FileType netrw setl bufhidden=delete
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => File (new) templates
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+if has("autocmd")
+    augroup templateFiles
+        autocmd BufNewFile *.py 0r ~/.vim/template_files/python.py
+        autocmd BufNewFile *.jl 0r ~/.vim/template_files/julia.jl
+        autocmd BufNewFile *.sh 0r ~/.vim/template_files/shellscript.sh
+        autocmd BufNewFile *.cpp 0r ~/.vim/template_files/cpp_source.cpp
+        autocmd BufNewFile *.hpp 0r ~/.vim/template_files/cpp_header.hpp
+    augroup END
+endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Text, tab and indent related
