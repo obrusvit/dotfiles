@@ -158,7 +158,10 @@ let g:SimpylFold_docstring_preview = 1
 " always start editing file with no folds
 set foldlevelstart=99
 
-" AutoPairs shortcuts (the default <M-'some'> doesn't work in gnome-terminal)
+" pydocstring, set to Google Style docstrings
+let g:pydocstring_templates_dir = '~/.vim/template_files/pydocstring_google_style'
+
+" auto-pairs shortcuts (the default <M-'some'> doesn't work in gnome-terminal)
 let g:AutoPairsShortcutToggle = '<C-p>' 
 let g:AutoPairsShortcutFastWrap = '<C-e>'
 
