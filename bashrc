@@ -117,12 +117,10 @@ if ! shopt -oq posix; then
 fi
 
 # [MINE ADDITION] Sumo home
-# export SUMO_HOME="/usr/local/share/sumo"
-#export SUMO_HOME="/home/obrusvit/Tools/sumo-1.3.1"
-export SUMO_HOME="/home/obrusvit/Tools/sumo-1.4.0"
+export SUMO_HOME="/usr/local/share/sumo"
+# export SUMO_HOME="/home/obrusvit/Tools/sumo-1.4.0"
 # export SUMO_HOME="/home/obrusvit/Tools/sumo"
 
-export SUMO_BIN="/usr/local/share/sumo/bin"
 export SUMO_FR="/home/obrusvit/Tools/sumo-1.2.0/tools/detector/flowrouter.py"
 export SUMO_VAL="/home/obrusvit/Tools/sumo-1.2.0/tools/detector/validate.py"
 
@@ -135,7 +133,7 @@ export EDITOR=vim
 export FILE=ranger
 
 # [MINE ADDITION]
-# Interesting functions from Quora https://www.quora.com/What-is-the-most-useful-bash-script-that-you-have-ever-written/answer/Danish-Pruthi?share=be33bcbf&srid=Wrzd
+# Four interesting functions from Quora https://www.quora.com/What-is-the-most-useful-bash-script-that-you-have-ever-written/answer/Danish-Pruthi?share=be33bcbf&srid=Wrzd
 function up() {
   times=$1
   while [ "$times" -gt "0" ]; do
@@ -180,12 +178,33 @@ export -f extract
 # [MINE ADDITION] Solarized dircolors
 eval `dircolors /home/obrusvit/.solarized/dircolors-solarized/dircolors.256dark`
 
+# [MINE ADDITION] find file with bat colorful preview
 function ff() {
     find ~/* -type f | fzf -m --preview="bat --style=numbers --color=always {} | head -500"
 }
 
+# [MINE ADDITON] clear all from tmux pane
 function clra() {
     # clear all
     clear
     tmux clear-history
 }
+
+# [MINE ADDITION] https://unix.stackexchange.com/questions/342064/ranger-cd-into-a-folder
+function ranger-cd {
+    local IFS=$'\t\n'
+    local tempfile="$(mktemp -t tmp.XXXXXX)"
+    local ranger_cmd=(
+        command
+        ranger
+        --cmd="map Q chain shell echo %d > "$tempfile"; quitall"
+    )
+
+    ${ranger_cmd[@]} "$@"
+    if [[ -f "$tempfile" ]] && [[ "$(cat -- "$tempfile")" != "$(echo -n `pwd`)" ]]; then
+        cd -- "$(cat "$tempfile")" || return
+    fi
+    command rm -f -- "$tempfile" 2>/dev/null
+}
+
+alias r=ranger-cd
