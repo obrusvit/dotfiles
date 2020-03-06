@@ -205,8 +205,19 @@ let g:ycm_enable_diagnostic_signs = 0
 "highlight YcmWarningSign guibg=#ffffcc
 "highlight YcmWarningSection guibg=#ffffcc
 
-" C/C++/Java/Kotlin - write long part - delimmiting line comment
-map <leader>/ O<ESC>o//------------------------------------------------------------------------------<ESC>
+if has("autocmd")
+    augroup delimitingComments
+        " C/C++/Java/Kotlin - write long part - delimmiting line comment
+        autocmd FileType c map <leader>/ O<ESC>o//------------------------------------------------------------------------------<ESC>
+        autocmd FileType cpp map <leader>/ O<ESC>o//------------------------------------------------------------------------------<ESC>
+        autocmd FileType java map <leader>/ O<ESC>o//------------------------------------------------------------------------------<ESC>
+        autocmd FileType kotlin map <leader>/ O<ESC>o//------------------------------------------------------------------------------<ESC>
+
+        " Python/Julia
+        autocmd FileType python map <leader>/ O<ESC>o# ==============================================================================<ESC>
+        autocmd FileType julia  map <leader>/ O<ESC>o# ==============================================================================<ESC>
+    augroup END
+endif
 
 " use Glaive to set parameters of codefmt
 Glaive codefmt clang_format_style='{
