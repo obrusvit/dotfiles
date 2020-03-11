@@ -5,9 +5,9 @@ author: Obrusnik Vit
 
 
 def main():
-    print("start!!")
+    print("start!")
 
-    print("done!!")
+    print("done!")
 
 
 if __name__ == '__main__':
