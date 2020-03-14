@@ -205,17 +205,11 @@ let g:ycm_enable_diagnostic_signs = 0
 "highlight YcmWarningSign guibg=#ffffcc
 "highlight YcmWarningSection guibg=#ffffcc
 
+" write long part - delimmiting line comment with <leader>/
 if has("autocmd")
     augroup delimitingComments
-        " C/C++/Java/Kotlin - write long part - delimmiting line comment
-        autocmd FileType c map <leader>/ O<ESC>o//------------------------------------------------------------------------------<ESC>
-        autocmd FileType cpp map <leader>/ O<ESC>o//------------------------------------------------------------------------------<ESC>
-        autocmd FileType java map <leader>/ O<ESC>o//------------------------------------------------------------------------------<ESC>
-        autocmd FileType kotlin map <leader>/ O<ESC>o//------------------------------------------------------------------------------<ESC>
-
-        " Python/Julia
-        autocmd FileType python map <leader>/ O<ESC>o# ==============================================================================<ESC>
-        autocmd FileType julia  map <leader>/ O<ESC>o# ==============================================================================<ESC>
+        autocmd FileType c,cpp,java,kotlin map <leader>/ O<ESC>o//------------------------------------------------------------------------------<ESC>
+        autocmd FileType python,julia map <leader>/ O<ESC>o# ==============================================================================<ESC>
     augroup END
 endif
 
@@ -280,6 +274,7 @@ set magic
 
 " Show matching brackets when text indicator is over them
 set showmatch 
+
 " How many tenths of a second to blink when matching brackets
 set mat=2
 
@@ -288,7 +283,6 @@ set noerrorbells
 set novisualbell
 set t_vb=
 set tm=500
-
 
 " Add a bit extra margin to the left
 set foldcolumn=1
@@ -301,6 +295,9 @@ set nu
 " CTRL+c from elsewhere can be pasted to vim with 'p'
 set clipboard=unnamed
 set clipboard=unnamedplus
+
+" see the command you're typing (bottom right)
+set showcmd
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Colors and Fonts
@@ -462,12 +459,16 @@ au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g
 """"""""""""""""""""""""""""""
 " => Status line
 """"""""""""""""""""""""""""""
+" The following two are nice for use with default Status line
 " Always show the status line
-set laststatus=2
-
+" set laststatus=2
 " Format the status line
-set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ Line:%l\ Col:%c
+" set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ Line:%l\ Col:%c
 
+" For use with Airline 
+set nosmd   " short for 'showmode', hides '-- INSERT --' etc., Airline shows it
+let g:airline_section_c ='%{HasPaste()}%F%m%r%h'      "(bufferline or filename, readonly)
+let g:airline_theme='solarized'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Editing mappings
@@ -485,7 +486,7 @@ fun! CleanExtraSpaces()
 endfun
 
 if has("autocmd")
-    autocmd BufWritePre *.txt,*.js,*.py,*.wiki,*.sh,*.coffee :call CleanExtraSpaces()
+    autocmd BufWritePre *.txt,*.py,*.wiki,*.sh :call CleanExtraSpaces()
 endif
 
 
