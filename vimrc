@@ -161,8 +161,10 @@ let g:SimpylFold_docstring_preview = 1
 " always start editing file with no folds
 set foldlevelstart=99
 
+" pydocstring, set doq path (installed in global python3 via pip3)
+let g:pydocstring_doq_path = '/home/obrusvit/.local/bin/doq'
 " pydocstring, set to Google Style docstrings
-let g:pydocstring_templates_dir = '~/.vim/template_files/pydocstring_google_style'
+let g:pydocstring_templates_path = '/home/obrusvit/.vim/template_files/pydocstring_google_style'
 
 " auto-pairs shortcuts (the default <M-'some'> doesn't work in gnome-terminal)
 let g:AutoPairsShortcutToggle = '<C-p>' 
