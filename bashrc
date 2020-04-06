@@ -117,12 +117,18 @@ if ! shopt -oq posix; then
 fi
 
 # [MINE ADDITION] Sumo home
-export SUMO_HOME="/usr/local/share/sumo"
+# export SUMO_HOME="/usr/local/share/sumo"
 # export SUMO_HOME="/home/obrusvit/Tools/sumo-1.4.0"
-# export SUMO_HOME="/home/obrusvit/Tools/sumo"
-
+export SUMO_HOME="/home/obrusvit/Tools/sumo"
 export SUMO_FR="/home/obrusvit/Tools/sumo-1.2.0/tools/detector/flowrouter.py"
 export SUMO_VAL="/home/obrusvit/Tools/sumo-1.2.0/tools/detector/validate.py"
+
+# [MINE ADDITION] Gurobi
+export GUROBI_HOME="/home/obrusvit/Tools/gurobi901/linux64"
+export PATH="${PATH}:${GUROBI_HOME}/bin"
+export LD_LIBRARY_PATH="${GUROBI_HOME}/lib"
+# export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:${GUROBI_HOME}/lib"
+export GRB_LICENSE_FILE="/home/obrusvit/Tools/gurobi.lic"
 
 # [MINE ADDITOIN] Own commands
 # Wacom setting "wacom", "wacom_work_display", "fix_inotify.." etc.
