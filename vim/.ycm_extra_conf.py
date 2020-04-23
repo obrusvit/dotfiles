@@ -47,7 +47,8 @@ flags = [
 '-x',
 'c++',
 '-Iinclude',
-'-std=c++17'
+'-std=c++17',
+'-fconcepts',
 ]
 
 def Settings( **kwargs ):

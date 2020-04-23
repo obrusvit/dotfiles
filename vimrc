@@ -51,9 +51,9 @@ Plugin 'tpope/vim-commentary'
 " languages syntax support
 Plugin 'octol/vim-cpp-enhanced-highlight'
 Plugin 'udalov/kotlin-vim'
-Plugin 'JuliaEditorSupport/julia-vim'
 Plugin 'vim-python/python-syntax'
 Plugin 'heavenshell/vim-pydocstring'
+Plugin 'JuliaEditorSupport/julia-vim'
 
 " Auto Pairs - Insert or delete brackets, parens, quotes in pair.
 Plugin 'jiangmiao/auto-pairs'
