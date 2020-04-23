@@ -119,7 +119,8 @@ fi
 # [MINE ADDITION] Sumo home
 # export SUMO_HOME="/usr/local/share/sumo"
 # export SUMO_HOME="/home/obrusvit/Tools/sumo-1.4.0"
-export SUMO_HOME="/home/obrusvit/Tools/sumo"
+# export SUMO_HOME="/home/obrusvit/Tools/sumo"
+export SUMO_HOME="/home/obrusvit/Tools/sumo-1.5.0"
 export SUMO_FR="/home/obrusvit/Tools/sumo-1.2.0/tools/detector/flowrouter.py"
 export SUMO_VAL="/home/obrusvit/Tools/sumo-1.2.0/tools/detector/validate.py"
 
