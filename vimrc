@@ -61,6 +61,11 @@ Plugin 'jiangmiao/auto-pairs'
 " YCM - see GitHub for correct setup and build
 Plugin 'Valloric/YouCompleteMe'
 
+" UltiSnips - Track the engine.
+Plugin 'SirVer/ultisnips'
+" Snippets are separated from the engine. Add this if you want them:
+Plugin 'honza/vim-snippets'
+
 " better code folding using 'zc' 'zo' commands
 Plugin 'tmhedberg/SimpylFold'
 
@@ -161,10 +166,10 @@ let g:SimpylFold_docstring_preview = 1
 " always start editing file with no folds
 set foldlevelstart=99
 
-" pydocstring, set doq path (installed in global python3 via pip3)
-let g:pydocstring_doq_path = '/home/obrusvit/.local/bin/doq'
-" pydocstring, set to Google Style docstrings
-let g:pydocstring_templates_path = '/home/obrusvit/.vim/template_files/pydocstring_google_style'
+" pydocstring, set to Google Style docstrings and disable mapping <C-l>
+" let g:pydocstring_templates_path = '/home/obrusvit/.vim/template_files/pydocstring_google_style'
+let g:pydocstring_formatter='google'
+let g:pydocstring_enable_mapping = 0
 
 " auto-pairs shortcuts (the default <M-'some'> doesn't work in gnome-terminal)
 let g:AutoPairsShortcutToggle = '<C-p>' 
@@ -178,7 +183,6 @@ let g:AutoPairsShortcutFastWrap = '<C-e>'
 " shortcuts for YCM"
 nmap <leader>g :YcmCompleter GoToDefinitionElseDeclaration<CR>
 nmap <leader>f :YcmCompleter FixIt<CR>
-
 
 " default fallback for YcmCompleter extra conf file
 " necessary for C languages semantic completition
@@ -220,6 +224,9 @@ Glaive codefmt clang_format_style='{
             \ IndentWidth: 4, 
             \ BreakBeforeBraces: Stroustrup
             \}'
+
+" UltiSnips 
+let g:UltiSnipsExpandTrigger="<c-l>"  "Ctrl-L
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => VIM user interface
