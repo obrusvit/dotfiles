@@ -345,6 +345,8 @@ set encoding=utf8
 " Use Unix as the standard file type
 set ffs=unix,dos,mac
 
+" highlight Folded term=bold,underline cterm=bold,underline ctermfg=12 ctermbg=0 guifg=Cyan guibg=DarkGrey
+highlight Folded term=bold,underline cterm=bold ctermfg=12 ctermbg=0 guifg=Cyan guibg=DarkGrey
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Files, backups, undo and netrw setup
