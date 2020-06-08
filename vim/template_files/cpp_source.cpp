@@ -1,20 +1,19 @@
 #include <iostream>
 #include <stdexcept>
-#include <vector>
-using namespace std;
 
 
 int main(){
     try {
+        std::cout << "Hello\n";
 
         return 0;
     }
-    catch(exception& e){
-        cerr << e.what() << "\n";
+    catch(std::exception& e){
+        std::cerr << e.what() << "\n";
         return 1;
     }
     catch(...){
-        cerr << "something went wrong\n";
+        std::cerr << "something went wrong\n";
         return 2;
     }
 }
