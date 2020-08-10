@@ -187,9 +187,8 @@ nmap <leader>f :YcmCompleter FixIt<CR>
 " default fallback for YcmCompleter extra conf file
 " necessary for C languages semantic completition
 let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
-"let g:ycm_global_ycm_extra_conf = "~/.vim/bundle/YouCompleteMe/third_party/ycmd/.ycm_extra_conf.py"
 
-" automatically load .ycm_extra_conf
+" =0 automatically load .ycm_extra_conf
 " WARNING car run malicious code, switch to 1 if not needed
 let g:ycm_confirm_extra_conf = 1
 

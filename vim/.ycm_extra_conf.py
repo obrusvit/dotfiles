@@ -46,9 +46,28 @@ flags = [
 # For a C project, you would set this to 'c' instead of 'c++'.
 '-x',
 'c++',
-'-Iinclude',
 '-std=c++17',
-'-fconcepts',
+# '-fconcepts',
+'-I', 'include',
+
+### echo | clang -v -E -x c++ -
+### then see what's under #include <...> starth here:
+# '-isystem', '/usr/include/x86_64-linux-gnu',
+# '-isystem', '/usr/lib/llvm-10/lib/clang/10.0.0/include',
+# '-isystem', '/usr/bin/../lib/gcc/x86_64-linux-gnu/10/../../../../include/c++',
+# '-isystem', '/usr/local/include',
+# '-isystem', '/usr/include',
+
+### echo | gcc -v -E -x c++ -
+### then see what's under #include <...> starth here:
+'-isystem', '/usr/include/c++/9',
+'-isystem', '/usr/include/x86_64-linux-gnu/c++/9',
+'-isystem', '/usr/include/c++/9/backward',
+# '-isystem', '/usr/lib/gcc/x86_64-linux-gnu/9/include',  # I replaced this with clang, prefered
+'-isystem', '/usr/lib/clang/10/include',
+'-isystem', '/usr/local/include',
+'-isystem', '/usr/include/x86_64-linux-gnu',
+'-isystem', '/usr/include',
 ]
 
 def Settings( **kwargs ):
