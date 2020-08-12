@@ -212,3 +212,22 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
+# [MINE ADDITION] activate python venv
+va() {
+    if [ -d venv3 ]; then
+        source venv3/bin/activate
+    elif [ -d venv2 ]; then
+        source venv2/bin/activate
+    elif [ -d venv ]; then
+        source venv/bin/activate
+    fi
+}
+va_() {
+    source venv/bin/activate
+}
+va2() {
+    source venv2/bin/activate
+}
+va3() {
+    source venv3/bin/activate
+}
