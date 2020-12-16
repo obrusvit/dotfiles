@@ -50,7 +50,6 @@ Plugin 'tpope/vim-commentary'
 
 " languages syntax support
 Plugin 'octol/vim-cpp-enhanced-highlight'
-Plugin 'udalov/kotlin-vim'
 Plugin 'vim-python/python-syntax'
 Plugin 'heavenshell/vim-pydocstring'
 Plugin 'JuliaEditorSupport/julia-vim'
@@ -80,19 +79,8 @@ Plugin 'altercation/vim-colors-solarized'
 Plugin 'https://github.com/vim-airline/vim-airline'
 Plugin 'https://github.com/vim-airline/vim-airline-themes'
 
-" THE FOLLOWING LINES are to add google code formatter, see github
-" Add maktaba and codefmt to the runtimepath.
-" (The latter must be installed before it can be used.)
-Plugin 'google/vim-maktaba'
-Plugin 'google/vim-codefmt'
-" Also add Glaive, which is used to configure codefmt's maktaba flags. See
-" `:help :Glaive` for usage.
-Plugin 'google/vim-glaive'
-
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
-" the glaive#Install() should go after the call vundle#end()
-call glaive#Install()
 
 filetype plugin indent on    " required
 " To ignore plugin indent changes, instead use:
@@ -143,6 +131,7 @@ au BufNewFile,BufRead *.py;
     \ set autoindent
     \ set fileformat=unix
 
+
 " Load ned.vim syntax file when opening omnet .ned files or .msg
 au BufRead,BufNewFile *.ned set filetype=ned
 au BufRead,BufNewFile *.msg set filetype=ned
@@ -162,7 +151,6 @@ let g:python_highlight_class_vars=1
 
 " SimplyFold Plugin setting
 let g:SimpylFold_docstring_preview = 1
-
 " always start editing file with no folds
 set foldlevelstart=99
 
@@ -183,9 +171,19 @@ let g:AutoPairsShortcutFastWrap = '<C-e>'
 " shortcuts for YCM"
 nmap <leader>g :YcmCompleter GoToDefinitionElseDeclaration<CR>
 nmap <leader>f :YcmCompleter FixIt<CR>
+nmap <leader>d :YcmCompleter GetDoc<CR>
+nmap <leader>r :YcmCompleter RefactorRename 
+command Fmt YcmCompleter Format
+"TODO finish Fmt for range
+" function! FormatGivenRange() range
+"     echo "firstline ".a:firstline." lastline ".a:lastline
+"     " :a:firstline,a:lastline YcmCompleter Format
+" endfunction
+
+" command! -range Fmt <line1>,<line2>call FormatGivenRange()
+
 
 " default fallback for YcmCompleter extra conf file
-" necessary for C languages semantic completition
 let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
 
 " =0 automatically load .ycm_extra_conf
@@ -202,27 +200,14 @@ let g:ycm_enable_diagnostic_signs = 0
 " turn off highlighting in red
 "let g:ycm_enable_diagnostic_highlighting = 0
 
-" YCM colors of errors and warnings
-" TODO not working now
-"highlight YcmErroLine guibg=#1f0000
-"highlight YcmErroSign guibg=#1f0000
-"highlight YcmWarningLine guibg=#ffffcc
-"highlight YcmWarningSign guibg=#ffffcc
-"highlight YcmWarningSection guibg=#ffffcc
 
 " write long part - delimmiting line comment with <leader>/
 if has("autocmd")
     augroup delimitingComments
-        autocmd FileType c,cpp,java,kotlin map <leader>/ O<ESC>o//------------------------------------------------------------------------------<ESC>
-        autocmd FileType python,julia map <leader>/ O<ESC>o# ==============================================================================<ESC>
+        autocmd FileType c,cpp,java,kotlin map <leader>/ O<ESC>o<ESC>2i/<ESC>78a-<ESC>
+        autocmd FileType python,julia map <leader>/ O<ESC>o<ESC>1i#<ESC>79a=<ESC>
     augroup END
 endif
-
-" use Glaive to set parameters of codefmt
-Glaive codefmt clang_format_style='{
-            \ IndentWidth: 4, 
-            \ BreakBeforeBraces: Stroustrup
-            \}'
 
 " UltiSnips 
 let g:UltiSnipsExpandTrigger="<c-l>"  "Ctrl-L
@@ -523,7 +508,6 @@ set term=screen-256color-bce
 
 " Write datetime when <F3> is pressed
 nmap <F3> i<C-R>=strftime("%Y-%m-%d %a %I:%M %p")<C-R><Esc>
-"imap <F3> <C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Helper functions
