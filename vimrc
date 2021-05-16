@@ -166,7 +166,7 @@ let g:AutoPairsShortcutFastWrap = '<C-e>'
 "==> YouCompleteMe (YCM) related stuff
 
 " set to 1 if you don't want to use YCM
-"let g:loaded_youcompleteme = 1
+" let g:loaded_youcompleteme = 1
 
 " shortcuts for YCM"
 nmap <leader>g :YcmCompleter GoToDefinitionElseDeclaration<CR>

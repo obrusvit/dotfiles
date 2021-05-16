@@ -28,10 +28,8 @@
 #
 # For more information, please refer to <http://unlicense.org/>
 
+compilationDatabase = ''
 
-# These are the compilation flags that will be used in case there's no
-# compilation database set (by default, one is not set).
-# CHANGE THIS LIST OF FLAGS. YES, THIS IS THE DROID YOU HAVE BEEN LOOKING FOR.
 flags = [
 '-Wall',
 '-Wextra',
@@ -40,37 +38,59 @@ flags = [
 '-Wno-variadic-macros',
 '-fexceptions',
 '-DNDEBUG',
-# THIS IS IMPORTANT! Without the '-x' flag, Clang won't know which language to
-# use when compiling headers. So it will guess. Badly. So C++ headers will be
-# compiled as C headers. You don't want that so ALWAYS specify the '-x' flag.
-# For a C project, you would set this to 'c' instead of 'c++'.
+
+# set the language
 '-x',
 'c++',
-'-std=c++17',
-# '-fconcepts',
+'-std=c++2a',
+
 '-I', 'include',
 
-### echo | clang -v -E -x c++ -
-### then see what's under #include <...> starth here:
-# '-isystem', '/usr/include/x86_64-linux-gnu',
-# '-isystem', '/usr/lib/llvm-10/lib/clang/10.0.0/include',
-# '-isystem', '/usr/bin/../lib/gcc/x86_64-linux-gnu/10/../../../../include/c++',
-# '-isystem', '/usr/local/include',
-# '-isystem', '/usr/include',
-
-### echo | gcc -v -E -x c++ -
-### then see what's under #include <...> starth here:
+# run 'c++ -v -E -x c++ -'
 '-isystem', '/usr/include/c++/9',
 '-isystem', '/usr/include/x86_64-linux-gnu/c++/9',
 '-isystem', '/usr/include/c++/9/backward',
-# '-isystem', '/usr/lib/gcc/x86_64-linux-gnu/9/include',  # I replaced this with clang, prefered
 '-isystem', '/usr/lib/clang/10/include',
 '-isystem', '/usr/local/include',
 '-isystem', '/usr/include/x86_64-linux-gnu',
 '-isystem', '/usr/include',
+
 ]
 
+def getCompileCommandsDirs(jsonPath):
+    import json
+    import re
+    retSet = set()  # set to prevent duplicates
+
+    with open(jsonPath) as f:
+        compileCommands = json.loads(f.read())
+
+    for fileCompiled in compileCommands:
+        command = fileCompiled['command']
+        for d in re.findall(r'(-isystem){1}(\s)([^\s]+)', command):
+            # system includes, res in group3: (-isystem){1}(\s)([^\s]+)
+            retSet.add(d[0] + d[2] )
+        for d in re.findall(r'(\-I[^\s]+)', command):
+            # include directories
+            retSet.add(''.join(d))
+        for d in re.findall(r'(\-D[^\s]+)', command):
+            # compiler directives in group1:  (\-D[^\s]+)
+            retSet.add(''.join(d))
+        for d in re.findall(r'(\-W[^\s]+)', command):
+            # warning flags
+            retSet.add(''.join(d))
+    return list(retSet)
+
+
 def Settings( **kwargs ):
-  return {
-    'flags': flags,
-  }
+    import os
+    global flags
+    global compilationDatabase
+    if os.path.isfile(compilationDatabase):
+        flagsFromDatabase = getCompileCommandsDirs(compilationDatabase)
+        finalFlags = flags + flagsFromDatabase
+    else:
+        finalFlags = flags
+    return {
+        'flags': finalFlags,
+    }
