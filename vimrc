@@ -1,7 +1,7 @@
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Used_by:
-"       obrusvit - @trashcleaner
+"       Vit Obrusnik - @obrusvit
 "
 " Based_on:
 "       Amir Salihefendic — @amix3k
@@ -398,6 +398,8 @@ set wrap "Wrap lines
 vnoremap <silent> * :<C-u>call VisualSelection('', '')<CR>/<C-R>=@/<CR><CR>
 vnoremap <silent> # :<C-u>call VisualSelection('', '')<CR>?<C-R>=@/<CR><CR>
 
+" vnoremap <silent> <leader>ag :<C-u>call VisualSelection('', '')<CR>:Ag <C-R>=@/<CR><CR>
+vnoremap <silent> Ag :<C-u>call VisualSelection('', '')<CR>:Ag <C-R>=@/<CR><CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Moving around, tabs, windows and buffers

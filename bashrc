@@ -131,9 +131,10 @@ export LD_LIBRARY_PATH="${GUROBI_HOME}/lib"
 # export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:${GUROBI_HOME}/lib"
 export GRB_LICENSE_FILE="/home/obrusvit/Tools/gurobi.lic"
 
-# [MINE ADDITOIN] Own commands
-# Wacom setting "wacom", "wacom_work_display", "fix_inotify.." etc.
-export PATH=$PATH:/home/obrusvit/bin
+# [MINE ADDITION] Own commands
+if [ -d "$HOME/.bin" ] ; then
+    export PATH="$PATH:$HOME/.bin"
+fi
 
 # [MINE ADDITION]
 export EDITOR=vim
@@ -187,7 +188,7 @@ eval `dircolors /home/obrusvit/.solarized/dircolors-solarized/dircolors.256dark`
 
 # [MINE ADDITION] find file with bat colorful preview
 function ff() {
-    find ~/* -type f | fzf -m --preview="bat --style=numbers --color=always {} | head -500"
+    find ~/* -type f | fzf -m --preview="batcat --style=numbers --color=always {} | head -500"
 }
 
 # [MINE ADDITON] clear all from tmux pane
