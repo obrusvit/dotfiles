@@ -298,22 +298,14 @@ set showcmd
 " Enable syntax highlighting
 syntax enable 
 
-" Enable 256 colors palette in Gnome Terminal
-if $COLORTERM == 'gnome-terminal'
-    set t_Co=256
-endif
-
 " background
 set background=dark
 
 " 256 = almost black, dark = katapa blue (default)
-" let g:solarized_termcolors='256' 
-let g:solarized_termcolors='dark' 
+" let g:solarized_termcolors='dark' 
 "
 " Default colorscheme
- " colorscheme desert 
  colorscheme solarized 
-
 
 " Set extra options when running in GUI mode
 if has("gui_running")
