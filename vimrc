@@ -9,7 +9,7 @@
 "           https://github.com/amix/vimrc
 "
 " Sections:
-"    -> Vundle setting
+"    -> vim-plug setting
 "    -> General
 "    -> Programming languages
 "    -> VIM user interface
@@ -27,74 +27,42 @@
 "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Vundle setting
+" vim-plug setting
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set nocompatible              " be iMproved, required
-filetype off                  " required
-
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
-
-" let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
-
-" Keep Plugin commands between vundle#begin/end.
-
-" Git wrapper for vim (it's a blast)
-Plugin 'tpope/vim-fugitive'
-" Comment out stuff
-Plugin 'tpope/vim-commentary'
+call plug#begin('~/.vim/plugged')
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-commentary'
 
 " languages syntax support
-Plugin 'octol/vim-cpp-enhanced-highlight'
-Plugin 'vim-python/python-syntax'
-Plugin 'heavenshell/vim-pydocstring'
-Plugin 'JuliaEditorSupport/julia-vim'
+Plug 'octol/vim-cpp-enhanced-highlight', {'for': 'cpp'}
+Plug 'vim-python/python-syntax', {'for': 'python'}
+Plug 'heavenshell/vim-pydocstring', {'for': 'python'}
+Plug 'JuliaEditorSupport/julia-vim', {'for': 'julia'}
 
 " Auto Pairs - Insert or delete brackets, parens, quotes in pair.
-Plugin 'jiangmiao/auto-pairs'
+Plug 'jiangmiao/auto-pairs'
 
 " YCM - see GitHub for correct setup and build
-Plugin 'Valloric/YouCompleteMe'
+Plug 'Valloric/YouCompleteMe'
 
-" UltiSnips - Track the engine.
-Plugin 'SirVer/ultisnips'
-" Snippets are separated from the engine. Add this if you want them:
-Plugin 'honza/vim-snippets'
+" UltiSnips engine & snippets
+Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 
 " better code folding using 'zc' 'zo' commands
-Plugin 'tmhedberg/SimpylFold'
+Plug 'tmhedberg/SimpylFold'
 
 " fzf (fuzzy finder) & integration
-Plugin 'junegunn/fzf'
-Plugin 'junegunn/fzf.vim'
+Plug 'junegunn/fzf'
+Plug 'junegunn/fzf.vim'
 
 " Solarized colorscheme
-Plugin 'altercation/vim-colors-solarized'
+Plug 'altercation/vim-colors-solarized'
 
 " Status tabline 
-Plugin 'https://github.com/vim-airline/vim-airline'
-Plugin 'https://github.com/vim-airline/vim-airline-themes'
+Plug 'https://github.com/vim-airline/vim-airline'
+Plug 'https://github.com/vim-airline/vim-airline-themes'
 
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
-
-filetype plugin indent on    " required
-" To ignore plugin indent changes, instead use:
-"filetype plugin on
-"
-" Brief help
-" :PluginList       - lists configured plugins
-" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
-" :PluginSearch foo - searches for foo; append `!` to refresh local cache
-" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
-"
-" see :h vundle for more details or wiki for FAQ
-" Put your non-Plugin stuff after this line
-"
+call plug#end()
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General
@@ -119,8 +87,6 @@ nmap <leader>w :w!<cr>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Programming languages
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-syntax on
-
 " prooper PEP 8 indentation for python
 au BufNewFile,BufRead *.py;
     \ set tabstop=4 
@@ -130,11 +96,6 @@ au BufNewFile,BufRead *.py;
     \ set expandtab
     \ set autoindent
     \ set fileformat=unix
-
-
-" Load ned.vim syntax file when opening omnet .ned files or .msg
-au BufRead,BufNewFile *.ned set filetype=ned
-au BufRead,BufNewFile *.msg set filetype=ned
 
 runtime macros/matchit.vim
 
