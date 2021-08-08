@@ -12,6 +12,7 @@
 "    -> vim-plug setting
 "    -> General
 "    -> Programming languages
+"       -> YouCompleteMe (YCM) related stuff
 "    -> VIM user interface
 "    -> Colors and Fonts
 "    -> Files, backups, undo and netrw setup
@@ -43,7 +44,8 @@ Plug 'JuliaEditorSupport/julia-vim', {'for': 'julia'}
 Plug 'jiangmiao/auto-pairs'
 
 " YCM - see GitHub for correct setup and build
-Plug 'Valloric/YouCompleteMe'
+Plug 'ycm-core/YouCompleteMe'
+Plug 'ycm-core/lsp-examples'
 
 " UltiSnips engine & snippets
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
@@ -54,6 +56,9 @@ Plug 'tmhedberg/SimpylFold'
 " fzf (fuzzy finder) & integration
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
+
+" :Ranger command
+Plug 'francoiscabrol/ranger.vim'
 
 " Solarized colorscheme
 Plug 'altercation/vim-colors-solarized'
@@ -102,6 +107,11 @@ runtime macros/matchit.vim
 " vim-commentary, julia commentstring
 autocmd FileType julia setlocal commentstring=#\ %s
 
+" disable julia-vim Latex-2-Unicode with <F7>
+noremap <expr> <F7> LaTeXtoUnicode#Toggle()
+noremap! <expr> <F7> LaTeXtoUnicode#Toggle()
+
+
 " C++ syntax
 let g:cpp_concepts_highlight = 1 
 
@@ -124,7 +134,18 @@ let g:pydocstring_enable_mapping = 0
 let g:AutoPairsShortcutToggle = '<C-p>' 
 let g:AutoPairsShortcutFastWrap = '<C-e>'
 
-"==> YouCompleteMe (YCM) related stuff
+" write long part - delimmiting line comment with <leader>/
+if has("autocmd")
+    augroup delimitingComments
+        autocmd FileType c,cpp,java,kotlin map <leader>/ O<ESC>o<ESC>2i/<ESC>78a-<ESC>
+        autocmd FileType python,julia map <leader>/ O<ESC>o<ESC>1i#<ESC>79a=<ESC>
+    augroup END
+endif
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"=> YouCompleteMe (YCM) related stuff
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " set to 1 if you don't want to use YCM
 " let g:loaded_youcompleteme = 1
@@ -133,7 +154,8 @@ let g:AutoPairsShortcutFastWrap = '<C-e>'
 nmap <leader>g :YcmCompleter GoToDefinitionElseDeclaration<CR>
 nmap <leader>f :YcmCompleter FixIt<CR>
 nmap <leader>d :YcmCompleter GetDoc<CR>
-nmap <leader>r :YcmCompleter RefactorRename 
+"ctrl-r, ctrl-w brings the word under cursor
+nmap <leader>r :YcmCompleter RefactorRename <C-R><C-W> 
 command Fmt YcmCompleter Format
 "TODO finish Fmt for range
 " function! FormatGivenRange() range
@@ -142,7 +164,6 @@ command Fmt YcmCompleter Format
 " endfunction
 
 " command! -range Fmt <line1>,<line2>call FormatGivenRange()
-
 
 " default fallback for YcmCompleter extra conf file
 let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
@@ -154,21 +175,23 @@ let g:ycm_confirm_extra_conf = 1
 " turn off the diagnostics whatsoever
 "let g:ycm_show_diagnostics_ui = 0
 
-" turn off the signs (arrows) on the left side of the screen
-" it moves code :(
+" turn off the signs (arrows) on the left side of the screen, it moves code :(
 let g:ycm_enable_diagnostic_signs = 0
 
 " turn off highlighting in red
 "let g:ycm_enable_diagnostic_highlighting = 0
 
-
-" write long part - delimmiting line comment with <leader>/
+" turn off popup window with arguments suggestions for julia
 if has("autocmd")
-    augroup delimitingComments
-        autocmd FileType c,cpp,java,kotlin map <leader>/ O<ESC>o<ESC>2i/<ESC>78a-<ESC>
-        autocmd FileType python,julia map <leader>/ O<ESC>o<ESC>1i#<ESC>79a=<ESC>
+    augroup juliaWithoutSignatureHelp
+        autocmd FileType julia let g:ycm_disable_signature_help = 1
     augroup END
 endif
+" let g:ycm_max_num_candidates_to_detail = 1
+
+" generated from lsp-examples (run python3 install.py --enable-julia)
+" modified to remove debug and empty Dict()
+source /home/obrusvit/.vim/plugged/lsp-examples/vimrc.generated
 
 " UltiSnips 
 let g:UltiSnipsExpandTrigger="<c-l>"  "Ctrl-L
@@ -380,11 +403,13 @@ map <leader>h :bprevious<cr>
 map <leader>tn :tabnew<cr>
 map <leader>to :tabonly<cr>
 map <leader>tc :tabclose<cr>
+map <leader>tl :tabnext<cr>
+map <leader>th :tabprev<cr>
 map <leader>tm :tabmove 
 
 " Let 'tl' toggle between this and the last accessed tab
 let g:lasttab = 1
-nmap <Leader>tl :exe "tabn ".g:lasttab<CR>
+nmap <Leader>tp :exe "tabn ".g:lasttab<CR>
 au TabLeave * let g:lasttab = tabpagenr()
 
 
