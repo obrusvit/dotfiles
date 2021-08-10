@@ -151,11 +151,12 @@ endif
 " let g:loaded_youcompleteme = 1
 
 " shortcuts for YCM"
-nmap <leader>g :YcmCompleter GoToDefinitionElseDeclaration<CR>
-nmap <leader>f :YcmCompleter FixIt<CR>
-nmap <leader>d :YcmCompleter GetDoc<CR>
+nmap <leader>yg :YcmCompleter GoToDefinitionElseDeclaration<CR>
+nmap <leader>yf :YcmCompleter FixIt<CR>
+nmap <leader>yd :YcmCompleter GetDoc<CR>
+nmap <leader>yr :YcmCompleter RefactorRename <C-R><C-W> 
 "ctrl-r, ctrl-w brings the word under cursor
-nmap <leader>r :YcmCompleter RefactorRename <C-R><C-W> 
+
 command Fmt YcmCompleter Format
 "TODO finish Fmt for range
 " function! FormatGivenRange() range
