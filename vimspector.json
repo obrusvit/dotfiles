@@ -1,0 +1,45 @@
+{
+  "configurations": {
+    "C++ Launch": {
+      "adapter": "vscode-cpptools",
+      "filetypes": [ "cpp", "c", "objc", "rust" ], // optional
+      "configuration": {
+        "request": "launch",
+        //"program": "./main",
+        "stopOnEntry": true,
+        "stopAtEntry": true,
+        "debugOptions": [],
+        "program": "${fileDirname}/${fileBasenameNoExtension}",
+        "args": [],
+        "cwd": "${cwd}",
+        "environment": [],
+        "externalConsole": true,
+        "MIMode": "gdb"
+      }
+    },
+    "C++ Attach": {
+      "adapter": "vscode-cpptools",
+      "filetypes": [ "cpp", "c", "objc", "rust" ], // optional
+      "configuration": {
+        "request": "attach",
+        "program": "${fileDirname}/${fileBasenameNoExtension}",
+        "MIMode": "gdb"
+      }
+    },
+    "Python - Launch": {
+      "adapter": "vscode-python",
+      "filetypes": [ "python" ], // optional
+      "configuration": {
+        "name": "Python: Launch current file",
+        "type": "python",
+        "request": "launch",
+        "stopOnEntry": true,
+        "stopAtEntry": true,
+        "console": "externalTerminal",
+        "debugOptions": [],
+        "cwd": "${cwd}",
+        "program": "${file}"
+        }
+    }
+  }
+}

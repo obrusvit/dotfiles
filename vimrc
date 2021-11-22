@@ -47,6 +47,9 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'ycm-core/YouCompleteMe'
 Plug 'ycm-core/lsp-examples'
 
+" vimspector - debugger
+Plug 'puremourning/vimspector'
+
 " UltiSnips engine & snippets
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 
@@ -196,6 +199,11 @@ source /home/obrusvit/.vim/plugged/lsp-examples/vimrc.generated
 
 " UltiSnips 
 let g:UltiSnipsExpandTrigger="<c-l>"  "Ctrl-L
+
+" Vimspector
+set mouse=a
+let g:vimspector_enable_mappings = 'HUMAN'
+let g:ycm_semantic_triggers =  {'VimspectorPrompt': [ '.', '->', ':', '<' ] }
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => VIM user interface
