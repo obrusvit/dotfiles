@@ -1,4 +1,3 @@
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Used_by:
 "       Vit Obrusnik - @obrusvit
@@ -33,6 +32,7 @@
 call plug#begin('~/.vim/plugged')
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-surround'
 
 " languages syntax support
 Plug 'octol/vim-cpp-enhanced-highlight', {'for': 'cpp'}
@@ -69,7 +69,6 @@ Plug 'altercation/vim-colors-solarized'
 " Status tabline 
 Plug 'https://github.com/vim-airline/vim-airline'
 Plug 'https://github.com/vim-airline/vim-airline-themes'
-
 call plug#end()
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -298,7 +297,7 @@ set background=dark
 " let g:solarized_termcolors='dark' 
 "
 " Default colorscheme
- colorscheme solarized 
+colorscheme solarized 
 
 " Set extra options when running in GUI mode
 if has("gui_running")
@@ -439,6 +438,23 @@ endtry
 " Return to last edit position when opening files (You want this!)
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 
+" BD command to use fzf to wipeout selected buffers
+function! s:list_buffers()
+  redir => list
+  silent ls
+  redir END
+  return split(list, "\n")
+endfunction
+
+function! s:delete_buffers(lines)
+  execute 'bwipeout' join(map(a:lines, {_, line -> split(line)[0]}))
+endfunction
+
+command! BD call fzf#run(fzf#wrap({
+  \ 'source': s:list_buffers(),
+  \ 'sink*': { lines -> s:delete_buffers(lines) },
+  \ 'options': '--multi --reverse --bind ctrl-a:select-all+accept'
+\ }))
 
 """"""""""""""""""""""""""""""
 " => Status line
