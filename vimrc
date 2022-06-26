@@ -74,6 +74,8 @@ call plug#end()
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set nocompatible
+
 " Sets how many lines of history VIM has to remember
 set history=500
 
@@ -154,6 +156,9 @@ endif
 
 " shortcuts for YCM"
 nmap <leader>yg :YcmCompleter GoToDefinitionElseDeclaration<CR>
+nmap <leader>yo :YcmCompleter GoToDocumentOutline<CR>
+nmap <leader>yq :YcmCompleter GoToReferences<CR>
+nmap <leader>yc :YcmCompleter GoToCallers<CR>
 nmap <leader>yf :YcmCompleter FixIt<CR>
 nmap <leader>yd :YcmCompleter GetDoc<CR>
 nmap <leader>yr :YcmCompleter RefactorRename <C-R><C-W> 
@@ -290,7 +295,7 @@ set showcmd
 " Enable syntax highlighting
 syntax enable 
 
-" background
+" background {dark/light}
 set background=dark
 
 " 256 = almost black, dark = katapa blue (default)
