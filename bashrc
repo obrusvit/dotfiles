@@ -116,21 +116,6 @@ if ! shopt -oq posix; then
   fi
 fi
 
-# [MINE ADDITION] Sumo home
-# export SUMO_HOME="/usr/local/share/sumo"
-# export SUMO_HOME="/home/obrusvit/Tools/sumo-1.4.0"
-# export SUMO_HOME="/home/obrusvit/Tools/sumo"
-export SUMO_HOME="/home/obrusvit/Tools/sumo-1.5.0"
-export SUMO_FR="/home/obrusvit/Tools/sumo-1.2.0/tools/detector/flowrouter.py"
-export SUMO_VAL="/home/obrusvit/Tools/sumo-1.2.0/tools/detector/validate.py"
-
-# [MINE ADDITION] Gurobi
-export GUROBI_HOME="/home/obrusvit/Tools/gurobi901/linux64"
-export PATH="${PATH}:${GUROBI_HOME}/bin"
-export LD_LIBRARY_PATH="${GUROBI_HOME}/lib"
-# export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:${GUROBI_HOME}/lib"
-export GRB_LICENSE_FILE="/home/obrusvit/Tools/gurobi.lic"
-
 # [MINE ADDITION] Own commands
 if [ -d "$HOME/.bin" ] ; then
     export PATH="$PATH:$HOME/.bin"
@@ -198,20 +183,6 @@ function clra() {
     tmux clear-history
 }
 
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/obrusvit/miniconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/home/obrusvit/miniconda3/etc/profile.d/conda.sh" ]; then
-        . "/home/obrusvit/miniconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="/home/obrusvit/miniconda3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
 
 # [MINE ADDITION] activate python venv
 va() {
