@@ -34,6 +34,7 @@ Plug 'ycm-core/lsp-examples'
 Plug 'puremourning/vimspector'
 " UltiSnips engine & snippets
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
+Plug 'psf/black', { 'branch': 'stable' }
 
 " better code folding using 'zc' 'zo' commands
 Plug 'tmhedberg/SimpylFold'
