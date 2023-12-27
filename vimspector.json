@@ -27,18 +27,19 @@
       }
     },
     "Python - Launch": {
-      "adapter": "vscode-python",
+      "adapter": "debugpy",
       "filetypes": [ "python" ], // optional
       "configuration": {
         "name": "Python: Launch current file",
         "type": "python",
         "request": "launch",
-        "stopOnEntry": true,
+        "stopOnEntry": false,
         "stopAtEntry": true,
         "console": "externalTerminal",
         "debugOptions": [],
         "cwd": "${cwd}",
-        "program": "${file}"
+        "program": "${file}",
+        //"python": "${cwd}/.venv/bin/python" // if .venv used
         }
     }
   }

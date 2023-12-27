@@ -40,8 +40,11 @@ Plug 'psf/black', { 'branch': 'stable' }
 Plug 'tmhedberg/SimpylFold'
 
 " fzf (fuzzy finder) & integration
-Plug 'junegunn/fzf'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+
+" Ranger integration
+Plug 'francoiscabrol/ranger.vim'
 
 " Auto Pairs - Insert or delete brackets, parens, quotes in pair.
 Plug 'jiangmiao/auto-pairs'
@@ -179,8 +182,8 @@ map <C-k> <C-W>k
 map <C-h> <C-W>h
 map <C-l> <C-W>l
 
-" Close the current buffer
-map <leader>bd :Bclose<cr>:tabclose<cr>gT
+" Close the current buffer but keep the split
+map <leader>bd :b#<bar>bd#<cr>
 
 " Close all the buffers
 map <leader>ba :bufdo bd<cr>
@@ -235,6 +238,25 @@ map <leader>s? z=
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugins setting
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" ALE (A.L.E)
+"""""""""""""
+let g:ale_enabled = 0
+let g:ale_linters_explicit = 1
+let g:ale_linters = {'python': ['flake8']}
+let g:ale_warn_about_trailing_whitespace = 0
+let g:ale_python_pylint_auto_poetry = 1
+" let g:ale_python_python_executable = '/home/obrusvit/repos/trezor-firmware/.venv/bin/python'
+" let g:ale_python_mypy_options = '--python-executable /home/obrusvit/repos/trezor-firmware/.venv/bin/python'
+" let g:ale_python_flake8_options = '--sys-path=/home/obrusvit/repos/trezor-firmware/core/src --sys-path=/home/obrusvit/repos/trezor-firmware/core/mocks --sys-path=/home/obrusvit/repos/trezor-firmware/core/mocks/generated'
+
+" let g:ale_python_pylint_executable = '/home/obrusvit/repos/trezor-firmware/.venv/bin/python'
+" let g:ale_python_pylint_options = '--init-hook="import sys; sys.path.extend([\'/home/obrusvit/repos/trezor-firmware/core/src\', \'/home/obrusvit/repos/trezor-firmware/core/mocks\', \'/home/obrusvit/repos/trezor-firmware/core/mocks/generated\'])"'
+
+" leg g:ale_python_auto_poetry = 1  " why doesn't it work"
+" leg g:ale_sign_error = 'B'
+" let g:ale_python_pyling_options = '--disable=missing-module-docstring'
+
+"""""""""""""""""""""
 " YouCompleteMe (YCM)
 """""""""""""""""""""
 " set to 1 if you don't want to use YCM
@@ -252,6 +274,8 @@ nmap <leader>yd :YcmCompleter GetDoc<CR>
 nmap <leader>yr :YcmCompleter RefactorRename <C-R><C-W> 
 
 command Fmt YcmCompleter Format
+" command Fmt if &filetype == 'python' | Black | else | YcmCompleter Format | endif
+" command Fmt Black
 
 " settings for YCM
 " default fallback for YcmCompleter extra conf file
