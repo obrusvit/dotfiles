@@ -19,12 +19,14 @@ endif
 
 call plug#begin('~/.vim/plugged')
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-rhubarb'  " GitHub support for fugitive
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 
 " languages support
 Plug 'octol/vim-cpp-enhanced-highlight', {'for': 'cpp'}
 Plug 'heavenshell/vim-pydocstring', { 'do': 'make install', 'for': 'python' }
+Plug 'vim-python/python-syntax', {'for': 'python'}
 " A.L.E. for linting
 Plug 'dense-analysis/ale'
 " YouCompleteMe
@@ -32,9 +34,13 @@ Plug 'ycm-core/YouCompleteMe'
 Plug 'ycm-core/lsp-examples'
 " vimspector - debugger
 Plug 'puremourning/vimspector'
+" Copilot
+Plug 'github/copilot.vim'
 " UltiSnips engine & snippets
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 Plug 'psf/black', { 'branch': 'stable' }
+" Nix expressions
+Plug 'LnL7/vim-nix'
 
 " better code folding using 'zc' 'zo' commands
 Plug 'tmhedberg/SimpylFold'
@@ -55,6 +61,9 @@ Plug 'altercation/vim-colors-solarized'
 " Status tabline 
 Plug 'https://github.com/vim-airline/vim-airline'
 Plug 'https://github.com/vim-airline/vim-airline-themes'
+
+" scrollbar
+Plug 'obcat/vim-sclow'
 call plug#end()
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -238,11 +247,16 @@ map <leader>s? z=
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugins setting
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" vim-python/python-syntax 
+"""""""""""""""""""""""""
+let g:python_highlight_all = 1
+
 " ALE (A.L.E)
 """""""""""""
 let g:ale_enabled = 0
 let g:ale_linters_explicit = 1
-let g:ale_linters = {'python': ['flake8']}
+let g:ale_linters = {'python': ['flake8', 'pyright']}
 let g:ale_warn_about_trailing_whitespace = 0
 let g:ale_python_pylint_auto_poetry = 1
 " let g:ale_python_python_executable = '/home/obrusvit/repos/trezor-firmware/.venv/bin/python'
@@ -316,6 +330,7 @@ let g:UltiSnipsExpandTrigger="<c-l>"  "Ctrl-L
 """""""""""""
 let g:SimpylFold_docstring_preview = 1
 " always start editing file with no folds
+set foldmethod=syntax
 set foldlevelstart=99
 
 " Auto-Pairs
@@ -325,10 +340,15 @@ let g:AutoPairsShortcutFastWrap = '<C-e>'
 
 " Airline
 """""""""
-let g:AutoPairsShortcutToggle = '<C-p>' 
 set nosmd   " short for 'showmode', hides '-- INSERT --' etc., Airline shows it
 let g:airline_section_c ='%{HasPaste()}%F%m%r%h'      "(bufferline or filename, readonly)
 let g:airline_theme='solarized'
+
+"sclow
+" let g:sclow_block_filetypes = ['netrw', 'nerdtree']
+let g:sclow_block_buftypes = ['terminal', 'prompt']
+let g:sclow_hide_full_length = 1
+set updatetime=2000
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Files browsing and netrw
@@ -362,6 +382,9 @@ if has("autocmd")
     augroup END
 endif
 
+" Treat SCons files as python
+au BufRead,BufNewFile SConstruct set filetype=python
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Colors and Fonts
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -369,7 +392,7 @@ endif
 syntax enable 
 
 " To solve issues with colors in tmux session
-" set term=screen-256color-bce
+set term=screen-256color-bce
 
 " background {dark/light}
 set background=dark
@@ -389,7 +412,7 @@ if has("gui_running")
 endif
 
 " highlight Folded term=bold,underline cterm=bold,underline ctermfg=12 ctermbg=0 guifg=Cyan guibg=DarkGrey
-highlight Folded term=bold,underline cterm=bold ctermfg=12 ctermbg=0 guifg=Cyan guibg=DarkGrey
+" highlight Folded term=bold,underline cterm=bold ctermfg=12 ctermbg=0 guifg=Cyan guibg=DarkGrey
 " highlight YcmErrorLine cterm=bold,underline ctermbg=3f0000
 " highlight YcmWarningLine cterm=bold,underline
 
@@ -429,3 +452,19 @@ function! VisualSelection(direction, extra_filter) range
     let @/ = l:pattern
     let @" = l:saved_reg
 endfunction
+
+" Function to toggle background setting
+function! ToggleBackground()
+    if &background == 'light'
+        set background=dark
+        echo "Background changed to dark."
+    elseif &background == 'dark'
+        set background=light
+        echo "Background changed to light."
+    else
+        echo "Background setting is not set to light or dark."
+    endif
+endfunction
+
+" Map a key to call the ToggleBackground function
+nnoremap <leader>tb :call ToggleBackground()<CR>
