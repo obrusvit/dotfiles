@@ -19,23 +19,16 @@ endif
 
 call plug#begin('~/.vim/plugged')
 Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-rhubarb'  " GitHub support for fugitive
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 
 " languages support
-Plug 'octol/vim-cpp-enhanced-highlight', {'for': 'cpp'}
-Plug 'heavenshell/vim-pydocstring', { 'do': 'make install', 'for': 'python' }
 Plug 'vim-python/python-syntax', {'for': 'python'}
-" A.L.E. for linting
-Plug 'dense-analysis/ale'
 " YouCompleteMe
 Plug 'ycm-core/YouCompleteMe'
 Plug 'ycm-core/lsp-examples'
 " vimspector - debugger
 Plug 'puremourning/vimspector'
-" Copilot
-Plug 'github/copilot.vim'
 " UltiSnips engine & snippets
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 Plug 'psf/black', { 'branch': 'stable' }
@@ -179,11 +172,8 @@ nmap <leader>w :w!<cr>
 " :W sudo saves the file (useful for handling the permission-denied error)
 command W w !sudo tee % > /dev/null
 
-" Remap VIM 0 to first non-blank character
-map 0 ^
-
-" Disable highlight when <leader><cr> is pressed
-map <silent> <leader><cr> :noh<cr>
+" Disable highlight when <ESC> is pressed
+map <silent> <ESC> :noh<cr>
 
 " Smart way to move between windows
 map <C-j> <C-W>j
@@ -251,24 +241,6 @@ map <leader>s? z=
 " vim-python/python-syntax 
 """""""""""""""""""""""""
 let g:python_highlight_all = 1
-
-" ALE (A.L.E)
-"""""""""""""
-let g:ale_enabled = 0
-let g:ale_linters_explicit = 1
-let g:ale_linters = {'python': ['flake8', 'pyright']}
-let g:ale_warn_about_trailing_whitespace = 0
-let g:ale_python_pylint_auto_poetry = 1
-" let g:ale_python_python_executable = '/home/obrusvit/repos/trezor-firmware/.venv/bin/python'
-" let g:ale_python_mypy_options = '--python-executable /home/obrusvit/repos/trezor-firmware/.venv/bin/python'
-" let g:ale_python_flake8_options = '--sys-path=/home/obrusvit/repos/trezor-firmware/core/src --sys-path=/home/obrusvit/repos/trezor-firmware/core/mocks --sys-path=/home/obrusvit/repos/trezor-firmware/core/mocks/generated'
-
-" let g:ale_python_pylint_executable = '/home/obrusvit/repos/trezor-firmware/.venv/bin/python'
-" let g:ale_python_pylint_options = '--init-hook="import sys; sys.path.extend([\'/home/obrusvit/repos/trezor-firmware/core/src\', \'/home/obrusvit/repos/trezor-firmware/core/mocks\', \'/home/obrusvit/repos/trezor-firmware/core/mocks/generated\'])"'
-
-" leg g:ale_python_auto_poetry = 1  " why doesn't it work"
-" leg g:ale_sign_error = 'B'
-" let g:ale_python_pyling_options = '--disable=missing-module-docstring'
 
 """""""""""""""""""""
 " YouCompleteMe (YCM)
@@ -371,16 +343,6 @@ let g:netrw_fastbrowse = 0 "fixes some bug
 " Per default, netrw leaves unmodified buffers open. This autocommand
 " deletes netrw's buffer once it's hidden (using ':q', for example)
 autocmd FileType netrw setl bufhidden=delete
-
-if has("autocmd")
-    augroup templateFiles
-        autocmd BufNewFile *.py 0r ~/.vim/template_files/python.py
-        autocmd BufNewFile *.jl 0r ~/.vim/template_files/julia.jl
-        autocmd BufNewFile *.sh 0r ~/.vim/template_files/shellscript.sh
-        autocmd BufNewFile *.cpp 0r ~/.vim/template_files/cpp_source.cpp
-        autocmd BufNewFile *.hpp 0r ~/.vim/template_files/cpp_header.hpp
-    augroup END
-endif
 
 " Treat SCons files as python
 au BufRead,BufNewFile SConstruct set filetype=python
