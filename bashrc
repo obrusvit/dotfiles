@@ -122,7 +122,9 @@ if [ -d "$HOME/.bin" ] ; then
 fi
 
 # [MINE ADDITION]
-export EDITOR=vim
+# Use neovim as the default editor.
+export EDITOR=nvim
+export VISUAL=nvim
 export FILE=ranger
 
 # [MINE ADDITION]
@@ -168,6 +170,9 @@ export -f extract
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
+# [MINE ADDITION] set vi mode (default is `emacs`), see also ~/.inputrc
+set -o vi
+
 # [MINE ADDITION] Solarized dircolors
 eval `dircolors /home/obrusvit/.solarized/dircolors-solarized/dircolors.256dark`
 
@@ -192,6 +197,8 @@ va() {
         source venv2/bin/activate
     elif [ -d venv ]; then
         source venv/bin/activate
+    elif [ -d .venv ]; then
+        source .venv/bin/activate
     fi
 }
 va_() {
@@ -203,3 +210,9 @@ va2() {
 va3() {
     source venv3/bin/activate
 }
+. "$HOME/.cargo/env"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+export PATH=$HOME/.local/bin:$PATH
