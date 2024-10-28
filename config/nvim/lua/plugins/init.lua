@@ -53,6 +53,9 @@ return {
 			statusline.section_location = function()
 				return "%2l:%-2v"
 			end
+
+			-- mini_diff can be used as a diff provider for CodeCompanion
+			require("mini.diff").setup()
 		end,
 	},
 }
