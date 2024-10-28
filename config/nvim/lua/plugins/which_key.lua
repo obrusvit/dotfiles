@@ -1,4 +1,13 @@
 -- Useful plugin to show you pending keybinds.
+-- We use:
+--  event = 'VimEnter'
+--
+-- which loads which-key before all the UI elements are loaded. Events can be
+-- normal autocommands events (`:help autocmd-events`).
+--
+-- Then, because we use the `config` key, the configuration only runs
+-- after the plugin has been loaded:
+--  config = function() ... end
 return {
 	"folke/which-key.nvim",
 	event = "VimEnter", -- Sets the loading event to 'VimEnter'
@@ -48,7 +57,6 @@ return {
 			{ "<leader>s", group = "[S]earch" },
 			{ "<leader>w", group = "[W]orkspace" },
 			{ "<leader>t", group = "[T]ab" },
-			{ "<leader>h", group = "Git [H]unk", mode = { "n", "v" } },
 		},
 	},
 }

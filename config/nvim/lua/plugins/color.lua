@@ -1,6 +1,7 @@
 return {
 	{
 		"folke/tokyonight.nvim",
+		lazy = false,
 		priority = 1000,
 		init = function()
 			-- there are others, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
@@ -10,6 +11,7 @@ return {
 			-- You can configure highlights by doing something like:
 			vim.cmd.hi("Comment gui=none")
 		end,
+		opts = {},
 	},
 	-- {
 	-- 	"Tsuzat/NeoSolarized.nvim",
@@ -45,6 +47,5 @@ return {
 		init = function()
 			-- vim.cmd.colorscheme("solarized")
 		end,
-
 	},
 }
