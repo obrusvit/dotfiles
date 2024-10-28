@@ -10,16 +10,18 @@ return {
 			"nvim-neotest/nvim-nio",
 			"rcarriga/nvim-dap-ui", -- dependent on nvim-nio
 			-- Optional virtual text support
-			-- "theHamsta/nvim-dap-virtual-text",
+			"theHamsta/nvim-dap-virtual-text",
 		},
 		config = function()
 			local dap = require("dap")
 			local dap_python = require("dap-python")
 
+			-- Set up a breakpoint for exceptions
+			dap.set_exception_breakpoints({ "all" })
+
 			-- Use the path to your virtual environment's Python interpreter
-			local path_to_py = vim.fn.getcwd() .. "/.venv/bin/python3"
+			local path_to_py = vim.fn.getcwd() .. "/.venv/bin/python"
 			dap_python.setup(path_to_py)
-			-- print(path_to_py)
 			dap_python.test_runner = "pytest"
 
 			dap.configurations.python = {
@@ -45,6 +47,7 @@ return {
 
 			-- Key mappings for nvim-dap
 			vim.api.nvim_set_keymap("n", "<F4>", "<cmd>lua require'dap'.terminate()<CR>", {})
+			vim.api.nvim_set_keymap('n', '<F4>', "<cmd>lua require('dap').terminate(); require('dapui').close()<CR>", { noremap = true, silent = true })
 			vim.api.nvim_set_keymap("n", "<F5>", "<cmd>lua require'dap'.continue()<CR>", {})
 			vim.api.nvim_set_keymap("n", "<F9>", "<cmd>lua require'dap'.toggle_breakpoint()<CR>", {})
 			vim.api.nvim_set_keymap("n", "<F10>", "<cmd>lua require'dap'.step_over()<CR>", {})
@@ -52,6 +55,7 @@ return {
 			vim.api.nvim_set_keymap("n", "<F12>", "<cmd>lua require'dap'.step_out()<CR>", {})
 
 			-- Key mappings for dap-python test helpers
+
 			vim.api.nvim_create_autocmd("FileType", {
 				pattern = "python",
 				callback = function()
@@ -59,7 +63,7 @@ return {
 						0,
 						"n",
 						"<Leader>dm",
-						"<cmd>lua require('dap-python').test_method()<CR>",
+						"<cmd>lua require('dap-python').test_method({})<CR>",
 						{ desc = "[D]ebug Test [M]ethod" }
 					)
 					vim.api.nvim_buf_set_keymap(
@@ -75,19 +79,18 @@ return {
 			-- Change how the breakpoint signs look
 			vim.fn.sign_define("DapBreakpoint", { text = "🛑", texthl = "", linehl = "", numhl = "" })
 
-			-- Shut down the UI if terminating the debugging via keymap (< F4 >)
-			local dapui = require("dapui")
-			dapui.setup()
 			-- Automatically open and close the UI when debugging starts/stops
+			local dapui = require("dapui")
 			dap.listeners.after.event_initialized["dapui_config"] = function()
 				dapui.open()
 			end
 			dap.listeners.before.event_terminated["dapui_config"] = function()
-				dapui.close()
+				-- dapui.close()
 			end
 			dap.listeners.before.event_exited["dapui_config"] = function()
-				dapui.close()
+				-- dapui.close()
 			end
+			dapui.setup()
 		end,
 	},
 }

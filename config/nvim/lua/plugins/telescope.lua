@@ -52,6 +52,7 @@ return {
 		require("telescope").setup({
 			defaults = {
 				dynamic_preview_title = true,
+				file_ignore_patterns = { "vendor" },
 				--   mappings = {
 				--     i = { ['<c-enter>'] = 'to_fuzzy_refine' },
 				--   },
