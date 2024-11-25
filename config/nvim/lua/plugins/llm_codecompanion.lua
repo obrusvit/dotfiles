@@ -13,6 +13,34 @@ return {
 		"nvim-telescope/telescope.nvim", -- Optional: For using slash commands
 		{ "stevearc/dressing.nvim", opts = {} }, -- Optional: Improves the default Neovim UI
 	},
+	config = function()
+		require("codecompanion").setup({
+			adapters = {
+				copilot = function()
+					return require("codecompanion.adapters").extend("copilot", {
+						schema = {
+							model = {
+								default = "claude-3.5-sonnet",
+							},
+						},
+					})
+				end,
+			},
+			display = {
+				chat = {
+					show_references = true,
+					show_header_separator = false,
+					show_settings = true,
+				},
+				diff = {
+					provider = "mini_diff",
+				},
+			},
+			opts = {
+				log_level = "DEBUG",
+			},
+		})
+	end,
 	init = function()
 		-- vim.api.nvim_set_keymap("n", "<C-a>", "<cmd>CodeCompanionActions<cr>", { noremap = true, silent = true })
 		-- vim.api.nvim_set_keymap("v", "<C-a>", "<cmd>CodeCompanionActions<cr>", { noremap = true, silent = true })
@@ -32,15 +60,4 @@ return {
 		-- Expand 'cc' into 'CodeCompanion' in the command line
 		vim.cmd([[cab cc CodeCompanion]])
 	end,
-	opts = {
-		display = {
-			show_settings = true,
-			chat = {
-				show_settings = true,
-			},
-			diff = {
-				provider = "mini_diff",
-			},
-		},
-	},
 }
