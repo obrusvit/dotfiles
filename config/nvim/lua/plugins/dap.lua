@@ -32,9 +32,11 @@ return {
 					-- program = vim.fn.getcwd() .. "/.venv/bin/pytest",
 					module = "pytest",
 					args = {
-						-- "tests/device_tests/cardano/test_sign_tx.py",
+						"-vs",
+						"tests/click_tests/test_reset_slip39_basic.py",
 						-- "-k",
-						-- "test_cardano_sign_tx",
+						-- ""
+						"--lang=cs"
 					},
 					cwd = vim.fn.getcwd(),
 					stopOnEntry = false,

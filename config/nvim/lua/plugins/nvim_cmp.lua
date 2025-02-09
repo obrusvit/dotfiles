@@ -70,12 +70,6 @@ return {
 				-- Manually trigger a completion from nvim-cmp.
 				["<C-Space>"] = cmp.mapping.complete({}),
 
-				-- Think of <c-l> as moving to the right of your snippet expansion.
-				--  So if you have a snippet that's like:
-				--  function $name($args)
-				--    $body
-				--  end
-				--
 				-- Move to the right/left of the snippet expansion.
 				["<C-l>"] = cmp.mapping(function()
 					if luasnip.expand_or_locally_jumpable() then
