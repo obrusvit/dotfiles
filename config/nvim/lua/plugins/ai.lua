@@ -28,47 +28,44 @@ return {
       "ibhagwan/fzf-lua", -- For using slash commands
       { "stevearc/dressing.nvim", opts = {} }, -- Optional: Improves the default Neovim UI
     },
-    config = function()
-      require("codecompanion").setup({
-        adapters = {
-          copilot = function()
-            return require("codecompanion.adapters").extend("copilot", {
-              schema = {
-                model = {
-                  -- default = "claude-3.5-sonnet",
-                  default = "o3-mini",
-                },
+    opts = {
+      adapters = {
+        copilot = function()
+          return require("codecompanion.adapters").extend("copilot", {
+            schema = {
+              model = {
+                -- default = "claude-3.5-sonnet",
+                default = "o3-mini",
               },
-            })
-          end,
-        },
-
-        strategies = {
-          chat = {
-            slash_commands = {
-              ["file"] = {
-                opts = {
-                  provider = "fzf_lua", -- default|telescope|mini_pick|fzf_lua
-                },
+            },
+          })
+        end,
+      },
+      strategies = {
+        chat = {
+          slash_commands = {
+            ["file"] = {
+              opts = {
+                provider = "fzf_lua", -- default|telescope|mini_pick|fzf_lua
               },
             },
           },
         },
-        display = {
-          chat = {
-            show_references = true,
-            show_header_separator = false,
-            show_settings = true,
-          },
-          diff = {
-            provider = "mini_diff",
-          },
+      },
+      display = {
+        chat = {
+          show_references = true,
+          show_header_separator = false,
+          show_settings = true,
         },
-        opts = {
-          log_level = "DEBUG",
+        diff = {
+          provider = "mini_diff",
         },
-      })
-    end,
+      },
+      opts = {
+        log_level = "DEBUG",
+      },
+    },
     init = function()
       -- vim.api.nvim_set_keymap("n", "<C-a>", "<cmd>CodeCompanionActions<cr>", { noremap = true, silent = true })
       -- vim.api.nvim_set_keymap("v", "<C-a>", "<cmd>CodeCompanionActions<cr>", { noremap = true, silent = true })
