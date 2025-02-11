@@ -52,7 +52,7 @@ return {
     require("telescope").setup({
       defaults = {
         dynamic_preview_title = true,
-        file_ignore_patterns = { "vendor" },
+        -- file_ignore_patterns = { "vendor" },
       },
       -- pickers = {}
       extensions = {
