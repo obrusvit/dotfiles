@@ -32,5 +32,7 @@ return { -- Collection of various small independent plugins/modules
 
     -- mini_diff can be used as a diff provider for CodeCompanion
     require("mini.diff").setup()
+
+    require("mini.sessions").setup()
   end,
 }
