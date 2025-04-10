@@ -29,6 +29,12 @@ vim.keymap.set("n", "<leader>tl", ":tabnext<CR>", { desc = "[T]ab next" })
 vim.keymap.set("n", "<leader>th", ":tabprev<CR>", { desc = "[T]ab prev" })
 vim.keymap.set("n", "<leader>tm", ":tabmove ", { desc = "[T]ab [M]ove" })
 
+vim.keymap.set("n", "<leader>sG", "<cmd>FzfLua live_grep<CR>", {
+  desc = "Search with grep",
+  silent = true,
+  noremap = true,
+})
+
 -- Open file explorer (Mini.files)
 vim.keymap.set("n", "<leader>e", function()
   require("mini.files").open(vim.api.nvim_buf_get_name(0))

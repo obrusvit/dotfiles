@@ -1,7 +1,6 @@
 --  Here are low-conf plugins
 return {
   "tpope/vim-sleuth", -- Detect tabstop and shiftwidth automatically
-  "tpope/vim-fugitive", -- git integration
   {
     -- `lazydev` configures Lua LSP for your Neovim config, runtime and plugins
     -- used for completion, annotations and signatures of Neovim apis
