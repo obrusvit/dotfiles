@@ -186,21 +186,6 @@ return {
     --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
     local servers = {
       -- see :help lspconfig-all
-      clangd = {
-        settings = {
-          clangd = {
-            fallbackFlags = {
-              "-std=c++20",
-              "-I/usr/bin/../lib/gcc/x86_64-linux-gnu/12/../../../../include/c++",
-              "-I/usr/lib/llvm-14/lib/clang/14.0.0/include",
-              "-I/usr/local/include",
-              "-I/usr/include/x86_64-linux-gnu",
-              "-I/usr/include",
-            },
-          },
-        },
-      },
-      -- gopls = {},
       pyright = {
         -- TODO: move this to some project specific function like rust
         settings = {
