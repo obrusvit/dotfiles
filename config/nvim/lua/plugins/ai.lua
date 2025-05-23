@@ -34,8 +34,9 @@ return {
           return require("codecompanion.adapters").extend("copilot", {
             schema = {
               model = {
-                default = "gpt-4.1",
+                -- default = "gpt-4.1",
                 -- default = "o4-mini",
+                default = "claude-sonnet-4",
                 -- default = "claude-3.7-sonnet",
                 -- default = "claude-3.7-sonnet-thought",
               },
