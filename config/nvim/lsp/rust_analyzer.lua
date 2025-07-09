@@ -12,6 +12,7 @@ local function get_rust_analyzer_project_settings()
               enable = true,
               -- overrideCommand = nil, -- Let rust-analyzer use default cargo
             },
+            loadOutDirsFromCheck = true, -- this should make `ffi` bindgens visible
             -- enableCargoRunner = true,
             -- features = { },
             allFeatures = true,
@@ -31,7 +32,9 @@ local function get_rust_analyzer_project_settings()
       ["rust-analyzer"] = {
         linkedProjects = "",
         cargo = {
-          buildScripts = {},
+          buildScripts = {
+            enable = true,
+          },
           -- features = {},
           allFeatures = true,
         },

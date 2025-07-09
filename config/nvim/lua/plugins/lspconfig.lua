@@ -15,6 +15,7 @@ return {
       -- Refer to :h vim.lsp.config() for more information.
       vim.lsp.config("*", {
         capabilities = vim.lsp.protocol.make_client_capabilities(),
+        offset_encoding = "utf-8",
       })
 
       -- TODO: not sure if these two lines are still needed in nvim 0.11
