@@ -22,22 +22,6 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 
-" languages support
-Plug 'vim-python/python-syntax', {'for': 'python'}
-" YouCompleteMe
-Plug 'ycm-core/YouCompleteMe'
-Plug 'ycm-core/lsp-examples'
-" vimspector - debugger
-Plug 'puremourning/vimspector'
-" UltiSnips engine & snippets
-Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
-Plug 'psf/black', { 'branch': 'stable' }
-" Nix expressions
-Plug 'LnL7/vim-nix'
-
-" better code folding using 'zc' 'zo' commands
-Plug 'tmhedberg/SimpylFold'
-
 " fzf (fuzzy finder) & integration
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
@@ -45,18 +29,12 @@ Plug 'junegunn/fzf.vim'
 " Ranger integration
 Plug 'francoiscabrol/ranger.vim'
 
-" Auto Pairs - Insert or delete brackets, parens, quotes in pair.
-Plug 'jiangmiao/auto-pairs'
-
 " Solarized colorscheme
 Plug 'altercation/vim-colors-solarized'
 
 " Status tabline 
 Plug 'https://github.com/vim-airline/vim-airline'
 Plug 'https://github.com/vim-airline/vim-airline-themes'
-
-" scrollbar
-Plug 'obcat/vim-sclow'
 call plug#end()
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -238,78 +216,6 @@ map <leader>s? z=
 " Plugins setting
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" vim-python/python-syntax 
-"""""""""""""""""""""""""
-let g:python_highlight_all = 1
-
-"""""""""""""""""""""
-" YouCompleteMe (YCM)
-"""""""""""""""""""""
-" set to 1 if you don't want to use YCM
-" let g:loaded_youcompleteme = 1
-
-" commands for YCM
-" NOTE: ctrl-r, ctrl-w brings the word under cursor
-nmap <leader>g :YcmCompleter GoToDefinitionElseDeclaration<CR>
-nmap <leader>yg :YcmCompleter GoToDefinitionElseDeclaration<CR>
-nmap <leader>yo :YcmCompleter GoToDocumentOutline<CR>
-nmap <leader>yq :YcmCompleter GoToReferences<CR>
-nmap <leader>yc :YcmCompleter GoToCallers<CR>
-nmap <leader>yf :YcmCompleter FixIt<CR>
-nmap <leader>yd :YcmCompleter GetDoc<CR>
-nmap <leader>yr :YcmCompleter RefactorRename <C-R><C-W> 
-
-command Fmt YcmCompleter Format
-" command Fmt if &filetype == 'python' | Black | else | YcmCompleter Format | endif
-" command Fmt Black
-
-" settings for YCM
-" default fallback for YcmCompleter extra conf file
-let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
-
-" =0 automatically load .ycm_extra_conf
-" WARNING car run malicious code, switch to 1 if not needed
-let g:ycm_confirm_extra_conf = 1
-
-" turn off the diagnostics whatsoever
-"let g:ycm_show_diagnostics_ui = 0
-
-" turn off the signs (arrows) on the left side of the screen (it can shift code to the right)
-"let g:ycm_enable_diagnostic_signs = 0
-"set signcolumn=no " other option"
-
-" turn off highlighting in red (it can reduce syntax to grey underlined)
-let g:ycm_enable_diagnostic_highlighting = 0
-
-"
-let g:ycm_update_diagnostics_in_insert_mode = 1
-" let g:ycm_echo_current_diagnostic = 1
-" Or, when you have Vim supporting virtual text
-let g:ycm_echo_current_diagnostic = 'virtual-text'
-
-" let g:ycm_max_num_candidates_to_detail = 1
-
-" Vimspector
-"""""""""""""
-set mouse=a
-let g:vimspector_enable_mappings = 'HUMAN'
-
-" UltiSnips 
-"""""""""""""
-let g:UltiSnipsExpandTrigger="<c-l>"  "Ctrl-L
-
-" SimplyFold
-"""""""""""""
-let g:SimpylFold_docstring_preview = 1
-" always start editing file with no folds
-set foldmethod=syntax
-set foldlevelstart=99
-
-" Auto-Pairs
-"""""""""""""
-let g:AutoPairsShortcutToggle = '<C-p>' 
-let g:AutoPairsShortcutFastWrap = '<C-e>'
-
 " Airline
 """""""""
 set nosmd   " short for 'showmode', hides '-- INSERT --' etc., Airline shows it
@@ -375,8 +281,6 @@ endif
 
 " highlight Folded term=bold,underline cterm=bold,underline ctermfg=12 ctermbg=0 guifg=Cyan guibg=DarkGrey
 " highlight Folded term=bold,underline cterm=bold ctermfg=12 ctermbg=0 guifg=Cyan guibg=DarkGrey
-" highlight YcmErrorLine cterm=bold,underline ctermbg=3f0000
-" highlight YcmWarningLine cterm=bold,underline
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Helper functions
@@ -414,19 +318,3 @@ function! VisualSelection(direction, extra_filter) range
     let @/ = l:pattern
     let @" = l:saved_reg
 endfunction
-
-" Function to toggle background setting
-function! ToggleBackground()
-    if &background == 'light'
-        set background=dark
-        echo "Background changed to dark."
-    elseif &background == 'dark'
-        set background=light
-        echo "Background changed to light."
-    else
-        echo "Background setting is not set to light or dark."
-    endif
-endfunction
-
-" Map a key to call the ToggleBackground function
-nnoremap <leader>tb :call ToggleBackground()<CR>
