@@ -56,3 +56,15 @@ vim.opt.cursorline = true
 
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.opt.scrolloff = 10
+
+-- Enable showing nonprintable characters
+-- write `:set list` to enable, `:set nolist` to disable
+vim.opt.list = false
+vim.opt.listchars = {
+  tab = "→ ",
+  eol = "↲",
+  nbsp = "␣",
+  trail = "•",
+  extends = "⟩",
+  precedes = "⟨",
+}
