@@ -10,9 +10,8 @@ return {
     lazy = false,
     priority = 1000,
     init = function()
-      -- there are others, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
-      -- vim.cmd.colorscheme("tokyonight-day")
-      vim.cmd.colorscheme("tokyonight-night")
+      -- there are others, such as 'tokyonight-storm', 'tokyonight-moon', etc.
+      vim.cmd.colorscheme("tokyonight-day")
 
       -- You can configure highlights by doing something like:
       vim.cmd.hi("Comment gui=none")
