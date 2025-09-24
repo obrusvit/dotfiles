@@ -30,19 +30,21 @@ return {
     },
     opts = {
       adapters = {
-        copilot = function()
-          return require("codecompanion.adapters").extend("copilot", {
-            schema = {
-              model = {
-                -- default = "gpt-4.1",
-                -- default = "o4-mini",
-                default = "claude-sonnet-4",
-                -- default = "claude-3.7-sonnet",
-                -- default = "claude-3.7-sonnet-thought",
+        http = {
+          copilot = function()
+            return require("codecompanion.adapters").extend("copilot", {
+              schema = {
+                model = {
+                  -- default = "gpt-4.1",
+                  -- default = "o4-mini",
+                  default = "claude-sonnet-4",
+                  -- default = "claude-3.7-sonnet",
+                  -- default = "claude-3.7-sonnet-thought",
+                },
               },
-            },
-          })
-        end,
+            })
+          end,
+        },
       },
       strategies = {
         chat = {
