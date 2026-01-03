@@ -4,6 +4,7 @@ return {
     opts = {
       suggestion = { enabled = false },
       panel = { enabled = false },
+      copilot_node_command = "/usr/bin/nodejs",
     },
   },
   {
@@ -35,11 +36,8 @@ return {
             return require("codecompanion.adapters").extend("copilot", {
               schema = {
                 model = {
-                  -- default = "gpt-4.1",
-                  -- default = "o4-mini",
-                  default = "claude-sonnet-4",
-                  -- default = "claude-3.7-sonnet",
-                  -- default = "claude-3.7-sonnet-thought",
+                  -- default = "gpt-5.1",
+                  default = "claude-sonnet-4.5",
                 },
               },
             })
