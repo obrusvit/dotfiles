@@ -2,8 +2,8 @@ return {
   {
     "zbirenbaum/copilot.lua",
     opts = {
-      suggestion = { enabled = false },
-      panel = { enabled = false },
+      panel = { enabled = false }, --useless with codecompanion
+      suggestion = { enabled = false }, -- disable for copilot-cmp use
       copilot_node_command = "/usr/bin/nodejs",
     },
   },

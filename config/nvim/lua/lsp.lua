@@ -27,7 +27,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
     -- Find references for the word under your cursor.
     map("gr", require("telescope.builtin").lsp_references, "[G]oto [R]eferences")
-    -- map("gr", "<cmd>FzfLua lsp_references<cr>", "[G]oto [R]eferences")
+    map("grr", "<cmd>FzfLua lsp_references<cr>", "[G]oto [R]efe[R]ences") -- overrides default mapping
 
     -- Jump to the implementation of the word under your cursor.
     --  Useful when your language has ways of declaring types without an actual implementation.
