@@ -30,7 +30,6 @@ local function get_rust_analyzer_project_settings()
     -- default rust-analyzer setting
     return {
       ["rust-analyzer"] = {
-        linkedProjects = "",
         cargo = {
           buildScripts = {
             enable = true,
