@@ -15,6 +15,13 @@ return {
 
       -- You can configure highlights by doing something like:
       vim.cmd.hi("Comment gui=none")
+
+      -- Clangd marks #ifdef-inactive regions with the semantic token type
+      -- "comment", which Neovim renders grey via @lsp.type.comment.{c,cpp}.
+      -- Clearing these groups lets normal treesitter highlights show through,
+      -- so inactive code looks like regular code.
+      vim.api.nvim_set_hl(0, "@lsp.type.comment.c", {})
+      vim.api.nvim_set_hl(0, "@lsp.type.comment.cpp", {})
     end,
     opts = {},
   },

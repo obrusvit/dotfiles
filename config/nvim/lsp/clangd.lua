@@ -1,2 +1,10 @@
 ---@type vim.lsp.Config
-return {}
+return {
+  cmd = {
+    "clangd",
+    "--background-index",
+  },
+  init_options = {
+    highlightInactiveRegions = false,
+  },
+}
