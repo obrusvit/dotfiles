@@ -31,24 +31,13 @@ return {
 
       dap.configurations.python = {
         {
-          name = "Python: Launch pytest",
+          name = "[Default] Py: Launch current file",
           type = "python",
           request = "launch",
-          -- program = vim.fn.getcwd() .. "/.venv/bin/pytest",
-          module = "pytest",
-          args = {
-            "-vs",
-            "tests/click_tests/test_reset_slip39_basic.py",
-            -- "-k",
-            -- ""
-            -- "--lang=cs",
-          },
+          program = "${file}",
           cwd = vim.fn.getcwd(),
-          stopOnEntry = false,
-          -- python = path_to_py,
           console = "integratedTerminal",
           justMyCode = false,
-          redirectOutput = true,
         },
       }
 
@@ -56,17 +45,13 @@ return {
       local mason_codelldb = vim.fn.stdpath("data") .. "/mason/packages/codelldb/extension/adapter/codelldb"
 
       dap.adapters.codelldb = {
-        type = "server",
-        port = "${port}",
-        executable = {
-          command = mason_codelldb,
-          args = { "--port", "${port}" },
-        },
+        type = "executable",
+        command = mason_codelldb,
       }
 
       dap.configurations.rust = {
         {
-          name = "Launch file",
+          name = "[Default] Rust: Launch file",
           type = "codelldb",
           request = "launch",
           program = function()
@@ -93,7 +78,7 @@ return {
           args = {},
         },
         {
-          name = "Launch with arguments",
+          name = "[Default] Rust: Launch with args",
           type = "codelldb",
           request = "launch",
           program = function()
@@ -106,6 +91,15 @@ return {
             local args_string = vim.fn.input("Arguments: ")
             return vim.split(args_string, " ")
           end,
+        },
+        {
+          name = "[Default] Rust: Attach to process",
+          type = "codelldb",
+          request = "attach",
+          pid = function()
+            return require("dap.utils").pick_process()
+          end,
+          cwd = "${workspaceFolder}",
         },
       }
 
