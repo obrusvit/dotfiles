@@ -36,8 +36,8 @@ return {
             return require("codecompanion.adapters").extend("copilot", {
               schema = {
                 model = {
-                  -- default = "gpt-5.1",
-                  default = "claude-sonnet-4.5",
+                  default = "claude-sonnet-4.6",
+                  choices = { "claude-sonnet-4.6", "claude-opus-4.6" },
                 },
               },
             })
@@ -59,10 +59,7 @@ return {
         chat = {
           show_references = true,
           show_header_separator = false,
-          show_settings = true,
-        },
-        diff = {
-          provider = "mini_diff",
+          show_settings = false,
         },
       },
       opts = {

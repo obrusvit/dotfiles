@@ -10,7 +10,6 @@ return { -- Collection of various small independent plugins/modules
 
     require("mini.ai").setup({ n_lines = 500 }) -- better around/inside textobject
     require("mini.surround").setup()
-    require("mini.diff").setup()
     require("mini.sessions").setup()
     require("mini.files").setup({ windows = { preview = true, width_preview = 50 } })
   end,
