@@ -95,7 +95,6 @@ return {
         { name = "luasnip" },
         { name = "path" },
         { name = "nvim_lsp_signature_help" },
-        { name = "copilot", group_index = 2 },
       },
     })
   end,

@@ -1,18 +1,5 @@
 return {
   {
-    "zbirenbaum/copilot.lua",
-    opts = {
-      panel = { enabled = false }, --useless with codecompanion
-      suggestion = { enabled = false }, -- disable for copilot-cmp use
-      copilot_node_command = "/usr/bin/nodejs",
-    },
-  },
-  {
-    -- This plugin enables using Copilot as a source for nvim-cmp.
-    "zbirenbaum/copilot-cmp",
-    opts = {},
-  },
-  {
     -- CodeCompanion
     -- see default config here: https://github.com/olimorris/codecompanion.nvim/blob/main/lua/codecompanion/config.lua
     "olimorris/codecompanion.nvim",
@@ -37,7 +24,7 @@ return {
               schema = {
                 model = {
                   default = "claude-sonnet-4.6",
-                  choices = { "claude-sonnet-4.6", "claude-opus-4.6" },
+                  choices = { "claude-sonnet-4.6", "claude-opus-4.8" },
                 },
               },
             })
