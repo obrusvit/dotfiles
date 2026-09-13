@@ -1,9 +1,7 @@
-local utils = require("utils_obrusvit")
 return {
   {
     -- Main LSP Configuration
     "mason-org/mason-lspconfig.nvim",
-    enabled = utils.__HAS_NVIM_011,
     dependencies = {
       "neovim/nvim-lspconfig", -- Collection of best-effort configs for LSP servers
       "mason-org/mason.nvim", -- Manage external editor tooling
@@ -25,6 +23,7 @@ return {
       require("mason-lspconfig").setup({
         ensure_installed = {
           "clangd",
+          "cmake",
           "rust_analyzer",
           "jsonls",
           "lua_ls",

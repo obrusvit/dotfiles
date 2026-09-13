@@ -5,10 +5,6 @@
 --   - `lsp/*.lua` (my own configurations)
 --]]
 
--- Load the LSP configuration plugin
--- NOTE: this is not needed because `mason-lspconfig` loads installed servers automatically, see `plugins/lspconfig.lua`
-vim.lsp.enable({ "clangd", "cmake", "rust_analyzer", "pyright", "lua_ls" })
-
 --- LSP servers settings
 vim.api.nvim_create_autocmd("LspAttach", {
   group = vim.api.nvim_create_augroup("kickstart-lsp-attach", { clear = true }),
