@@ -3,6 +3,7 @@ return {
   -- nvim-dap and its extensions
   {
     "mfussenegger/nvim-dap",
+    keys = { "<F4>", "<F5>", "<F9>", "<S-F9>", "<F10>", "<F11>", "<F12>" },
     dependencies = {
       -- Python adapter for nvim-dap
       "mfussenegger/nvim-dap-python",
