@@ -23,7 +23,7 @@ return {
       lua = { "stylua" },
       -- Conform can also run multiple formatters sequentially
       c = { "clangformat" },
-      python = { "isort", "black" },
+      python = { "ruff" },
       rust = { "rustfmt" },
       json = { "prettier" },
       --
