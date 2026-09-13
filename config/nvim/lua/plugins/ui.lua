@@ -2,7 +2,9 @@ return {
   {
     -- Improves default UI
     "stevearc/dressing.nvim",
-    opts = {},
+    -- fzf-lua owns vim.ui.select (register_ui_select), so dressing
+    -- only handles vim.ui.input
+    opts = { select = { enabled = false } },
   },
   {
     -- colorscheme
