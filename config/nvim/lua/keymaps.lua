@@ -18,8 +18,8 @@ vim.keymap.set("n", "<C-l>", "<C-w><C-l>", { desc = "Move focus to the right win
 -- vim.keymap.set("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper window" })
 
 -- Keybinds to make buffer navigation easier.
-vim.keymap.set("n", "<leader>l", ":bnext<CR>", { desc = "Next buffer" })
-vim.keymap.set("n", "<leader>h", ":bprev<CR>", { desc = "Prev buffer" })
+vim.keymap.set("n", "<leader>l", "<cmd>bnext<CR>", { desc = "Next buffer" })
+vim.keymap.set("n", "<leader>h", "<cmd>bprev<CR>", { desc = "Prev buffer" })
 
 -- Keybinds for managing tabs
 vim.keymap.set("n", "<leader>tn", ":tabnew<CR>", { desc = "[T]ab [N]ew" })
