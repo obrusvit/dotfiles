@@ -13,18 +13,12 @@ return {
     config = function()
       -- Add the same capabilities to ALL server configurations.
       -- Refer to :h vim.lsp.config() for more information.
+      -- default_capabilities() merges nvim-cmp's extra completion
+      -- capabilities on top of Neovim's base client capabilities.
       vim.lsp.config("*", {
-        capabilities = vim.lsp.protocol.make_client_capabilities(),
+        capabilities = require("cmp_nvim_lsp").default_capabilities(),
         offset_encoding = "utf-8",
       })
-
-      -- TODO: not sure if these two lines are still needed in nvim 0.11
-      -- LSP servers and clients are able to communicate to each other what features they support.
-      --  By default, Neovim doesn't support everything that is in the LSP specification.
-      --  When you add nvim-cmp, luasnip, etc. Neovim now has *more* capabilities.
-      --  So, we create new capabilities with nvim cmp, and then broadcast that to the servers.
-      local capabilities = vim.lsp.protocol.make_client_capabilities()
-      capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
 
       require("fidget").setup({})
       require("mason").setup()
