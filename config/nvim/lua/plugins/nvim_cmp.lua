@@ -55,7 +55,7 @@ return {
       --
       -- No, but seriously. Please read `:help ins-completion`, it is really good!
       mapping = cmp.mapping.preset.insert({
-        ["<C-n"] = cmp.mapping.select_next_item(),
+        ["<C-n>"] = cmp.mapping.select_next_item(),
         ["<C-p>"] = cmp.mapping.select_prev_item(),
 
         -- Accept ([y]es) the completion.
