@@ -20,14 +20,10 @@ return {
       -- Set up a breakpoint for exceptions
       dap.set_exception_breakpoints({ "all" })
 
-      -- Use the path to your virtual environment's Python interpreter
-      local path_to_py = vim.fn.getcwd() .. "/.venv/bin/python"
-
-      dap_python.setup(path_to_py)
-      dap_python.test_runner = "pytest"
-
+      -- Use the debugpy interpreter installed via mason
       local mason_debugpy = vim.fn.stdpath("data") .. "/mason/packages/debugpy/venv/bin/python"
-      require("dap-python").setup(mason_debugpy)
+      dap_python.setup(mason_debugpy)
+      dap_python.test_runner = "pytest"
 
       dap.configurations.python = {
         {
