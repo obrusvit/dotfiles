@@ -3,7 +3,13 @@ return {
   -- nvim-dap and its extensions
   {
     "mfussenegger/nvim-dap",
-    keys = { "<F4>", "<F5>", "<F9>", "<S-F9>", "<F10>", "<F11>", "<F12>" },
+    -- stylua: ignore
+    keys = {
+      "<F4>", "<F5>", "<F9>", "<S-F9>", "<F10>", "<F11>", "<F12>",
+      { "<F8>", function() require("dap").run_to_cursor() end, desc = "DAP: Run to Cursor" },
+      { "<leader>dm", function() require("dap-python").test_method() end, ft = "python", desc = "[D]ebug Test [M]ethod" },
+      { "<leader>dc", function() require("dap-python").test_class() end, ft = "python", desc = "[D]ebug Test [C]lass" },
+    },
     dependencies = {
       -- Python adapter for nvim-dap
       "mfussenegger/nvim-dap-python",
@@ -18,8 +24,9 @@ return {
       local dapui = require("dapui")
       local dap_python = require("dap-python")
 
-      -- Set up a breakpoint for exceptions
-      dap.set_exception_breakpoints({ "all" })
+      -- Break on uncaught exceptions ("all" is not a valid debugpy
+      -- filter and would be a silent no-op; "raised" is too noisy)
+      dap.set_exception_breakpoints({ "uncaught" })
 
       -- Use the debugpy interpreter installed via mason
       local mason_debugpy = vim.fn.stdpath("data") .. "/mason/packages/debugpy/venv/bin/python"
@@ -100,6 +107,21 @@ return {
         },
       }
 
+      -- C/C++ configurations reuse the codelldb adapter
+      local c_launch = {
+        name = "[Default] C/C++: Launch file",
+        type = "codelldb",
+        request = "launch",
+        program = function()
+          return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
+        end,
+        cwd = "${workspaceFolder}",
+        stopOnEntry = false,
+        args = {},
+      }
+      dap.configurations.cpp = { c_launch }
+      dap.configurations.c = { c_launch }
+
       -- Key mappings for nvim-dap
       local keymap_opts = { noremap = true, silent = true }
       vim.keymap.set("n", "<F4>", function()
@@ -119,20 +141,6 @@ return {
       vim.keymap.set("n", "<F10>", dap.step_over, vim.tbl_extend("force", keymap_opts, { desc = "DAP: Step Over" }))
       vim.keymap.set("n", "<F11>", dap.step_into, vim.tbl_extend("force", keymap_opts, { desc = "DAP: Step Into" }))
       vim.keymap.set("n", "<F12>", dap.step_out, vim.tbl_extend("force", keymap_opts, { desc = "DAP: Step Out" }))
-
-      -- Key mappings for dap-python test helpers
-      vim.api.nvim_create_autocmd("FileType", {
-        pattern = "python",
-        callback = function(ev)
-          vim.keymap.set("n", "<Leader>dm", function()
-            require("dap-python").test_method()
-          end, vim.tbl_extend("force", keymap_opts, { buffer = ev.buf, desc = "[D]ebug Test [M]ethod" }))
-
-          vim.keymap.set("n", "<Leader>dc", function()
-            require("dap-python").test_class()
-          end, vim.tbl_extend("force", keymap_opts, { buffer = ev.buf, desc = "[D]ebug Test [C]lass" }))
-        end,
-      })
 
       -- Change how the breakpoint signs look
       vim.fn.sign_define("DapBreakpoint", { text = "🛑", texthl = "DiagnosticError", linehl = "", numhl = "" })
